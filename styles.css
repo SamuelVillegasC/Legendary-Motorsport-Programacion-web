@@ -44,7 +44,6 @@ body {
 }
 
 .header-inner {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
   height: 70px;
@@ -65,7 +64,7 @@ body {
   letter-spacing: 0.4em;
   color: var(--gold);
   position: absolute;
-  left: 50%;
+  left: 45%;
   transform: translateX(-50%);
 }
 
@@ -354,4 +353,160 @@ body {
 
 .btn-buy:hover {
   background: var(--gold);
+}
+
+
+.contacto {
+  padding: 7rem 2rem;
+  background: var(--light-2);
+}
+
+.contacto-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.contacto-texto {
+  flex: 1 1 280px;
+}
+
+.contacto-texto .section-label {
+  text-align: left;
+}
+
+.contacto-texto h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.contacto-texto p {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.9;
+}
+
+#form {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#form label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+#email {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #ccc;
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--dark);
+  outline: none;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+
+#email::placeholder {
+  color: #aaa;
+}
+
+#email:focus {
+  border-color: var(--gold);
+}
+
+#submit {
+  padding: 0.9rem 2rem;
+  background: var(--dark);
+  color: var(--white);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition);
+  width: 100%;
+  font-weight: 500;
+}
+
+#submit:hover {
+  background: var(--gold);
+}
+
+.footer {
+  background: var(--dark);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(184, 147, 90, 0.15);
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.footer p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    margin-left: 0;
+    padding: 0 1rem;
+  }
+
+  .hero-decoration {
+    display: none;
+  }
+
+  .contacto-inner {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .logo-text {
+    font-size: 1.3rem;
+  }
+
+  #nav-bar {
+    gap: 1.2rem;
+  }
+
+  .nav-link {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  .productos {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .producto-card {
+    max-width: 100%;
+  }
+
+  .hero {
+    padding-top: 100px;
+  }
 }
