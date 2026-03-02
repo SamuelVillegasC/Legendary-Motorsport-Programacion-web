@@ -115,3 +115,116 @@ body {
   overflow: hidden;
   background: radial-gradient(ellipse at 70% 50%, #1c1510 0%, var(--dark) 65%);
 }
+
+.hero-content {
+  max-width: 600px;
+  margin-left: calc((100vw - 1200px) / 2);
+  position: relative;
+  z-index: 2;
+}
+
+.hero-subtitle {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin-bottom: 2.5rem;
+  line-height: 1.9;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn-primary:hover {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.hero-decoration {
+  position: absolute;
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.circle-lg {
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  border: 1px solid rgba(184, 147, 90, 0.12);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circle-sm {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(184, 147, 90, 0.2);
+  background: radial-gradient(circle at center, rgba(184,147,90,0.05), transparent 70%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header.light h2,
+.section-header.light .section-label {
+  color: var(--light);
+}
+
+.section-label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: var(--dark);
+}
