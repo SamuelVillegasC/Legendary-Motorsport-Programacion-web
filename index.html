@@ -4,32 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LEGENDARY MOTORSPORT</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SamuelVillegasC/Legendary-Motorsport-Programacion-web@main/styles.css" />
-  <link href="icons" rel="icons"/>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
   <header id="header">
     <div class="header-inner">
-      <img id="header-img" src="LM_Icon.png" alt="LMS Logo"/>
       <div class="logo-text">LEGENDARY MOTORSPORT</div>
       <nav id="nav-bar">
-        <a href="Catalogo.html" class="nav-link">Catalogo</a>
-        <a href="Mision.html" class="nav-link">Mision</a>
-        <a href="Vision.html" class="nav-link">Vision</a>
+        <a href="index.html"    class="nav-link active-link">Inicio</a>
+        <a href="Catalogo.html" class="nav-link">Catálogo</a>
+        <a href="Mision.html"   class="nav-link">Misión</a>
+        <a href="Vision.html"   class="nav-link">Visión</a>
         <a href="Contacto.html" class="nav-link">Contacto</a>
-        <a href="#coleccion" class="nav-link">Novedades</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-content">
-
       <h1 class="hero-title">Legendary<br/><em>Motorsport</em></h1>
-      <h2><span class="hero-subtitle">La elegancia en 4 ruedas</span></h2>
-      <p class="hero-desc">Cada vehículo es una obra maestra de ingeniería y diseño, creada para quienes entienden que un coche es mucho más que un medio de transporte.</p>
-      <a href="Catalogo.html" class="btn-primary">Ver Catalogo Completo</a>
+      <span class="hero-subtitle">La elegancia en 4 ruedas</span>
+      <p class="hero-desc">
+        Cada vehículo es una obra maestra de ingeniería y diseño, creada
+        para quienes entienden que un coche es mucho más que un medio de transporte.
+      </p>
+      <a href="Catalogo.html" class="btn-primary">Ver Catálogo Completo</a>
     </div>
     <div class="hero-decoration">
       <div class="circle-lg"></div>
@@ -37,59 +38,93 @@
     </div>
   </section>
 
-  <section id="coleccion">
-    <div class="productos">
-      <div class="producto-card">
-          <div class="producto-img-wrap">
-            <img src="IMAGENCARRO1AQUI" alt="CARRO1"/>
-            <span class="producto-badge">Bestseller</span>
-          </div>
-          <div class="producto-info">
-            <h3>titulo carro aqui</h3>
-            <p>DESCRP. CARRO AQUI</p>
-            <div class="producto-footer">
-              <span class="precio">Previa del precio aqui</span>
-              <button class="btn-buy">Adquirir</button>
-            </div>
-          </div>
+  <div id="app-stats">
+    <section class="stats-section">
+      <div class="stats-inner">
+
+        <div class="stat-item">
+          <span class="stat-number">{{ displayVehiculos }}</span>
+          <span class="stat-label">Vehículos disponibles</span>
         </div>
 
-        <div class="producto-card featured">
+        <div class="stat-item">
+          <span class="stat-number">{{ displayMarcas }}</span>
+          <span class="stat-label">Marcas exclusivas</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-number">{{ displayAnios }}+</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-number">{{ displayClientes }}</span>
+          <span class="stat-label">Clientes satisfechos</span>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <div id="app-novedades">
+    <section class="coleccion-dark">
+
+      <div class="section-header" style="margin-bottom:2.5rem;">
+        <span class="section-label">— Últimas incorporaciones —</span>
+        <h2 style="color:var(--light); font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); font-weight:300;">
+          Novedades
+        </h2>
+      </div>
+
+      <!-- Tarjetas generadas dinámicamente desde el catálogo -->
+      <div class="productos" v-if="featuredCars.length > 0">
+        <div
+          class="producto-card"
+          v-for="car in featuredCars"
+          :key="car.id"
+          :class="{ featured: car.badge === 'Exclusivo' || car.badge === 'Premium' }"
+        >
           <div class="producto-img-wrap">
-            <img src="CARRO2AQUIFT" alt="CARRO 2"/>
-            <span class="producto-badge gold">RECIEN LLEGADO</span>
+            <img :src="car.imagen" :alt="car.nombre" />
+            <span
+              v-if="car.badge"
+              class="producto-badge"
+              :class="{ gold: car.badge === 'Recién llegado' || car.badge === 'Exclusivo' }"
+            >{{ car.badge }}</span>
           </div>
           <div class="producto-info">
-            <h3>titulo carro 2 aqui</h3>
-            <p>DESCRP. CARRO 2 AQUI</p>
+            <span class="producto-marca">{{ car.marca }}</span>
+            <h3>{{ car.nombre }}</h3>
+            <p>{{ car.descripcion }}</p>
             <div class="producto-footer">
-              <span class="precio">previa del precio</span>
-              <button class="btn-buy">Adquirir</button>
+              <span class="precio">{{ formatPrice(car.precio) }}</span>
+              <a href="Catalogo.html" class="btn-buy">Ver más</a>
             </div>
           </div>
         </div>
-    </div>
-  </section>
+      </div>
+
+      <div v-else style="text-align:center; padding:3rem; color:var(--text-muted);">
+        <p style="font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase;">
+          Catálogo en preparación
+        </p>
+      </div>
+
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="Catalogo.html" class="btn-primary">Ver catálogo completo</a>
+      </div>
+
+    </section>
+  </div>
 
   <footer class="footer">
     <div class="footer-logo">LEGENDARY</div>
-    <p> 2026 LEGENDARY MOTORSPORT todos los derechos reservados.</p>
-    <p>
-    <div class="productos">
-    <a href="https://jigsaw.w3.org/css-validator/check/referer">
-        <img style="border:0;width:88px;height:31px"
-            src="https://jigsaw.w3.org/css-validator/images/vcss"
-            alt="¡CSS Válido!" />
-    </a>
-    <p>
-    <a href="https://www.w3.org/Icons/valid-html401">
-        <img style="border:0;width:88px;height:31px"
-            src="https://www.w3.org/Icons/valid-html401"
-            alt="¡HTML Válido!" />
-    </a>
-    </p>
-  </div>
+    <p>© 2026 LEGENDARY MOTORSPORT — Todos los derechos reservados.</p>
   </footer>
+
+  <script src="catalogo-data.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="index.js"></script>
 
 </body>
 </html>

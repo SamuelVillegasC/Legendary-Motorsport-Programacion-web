@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="admin.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
 </head>
-<body>
+<body id="app-admin">
 
   <aside class="sidebar">
     <div class="brand">
@@ -18,22 +18,23 @@
       </div>
     </div>
     <nav>
-      <a href="#" class="nav-link active" data-panel="alta">Alta</a>
-      <a href="#" class="nav-link" data-panel="modificacion">Modificación</a>
-      <a href="#" class="nav-link" data-panel="eliminacion">Eliminación</a>
-      <a href="index.html" class="nav-link">Volver al Sitio</a>
+      <a href="#" class="nav-link" :class="{ active: panel === 'alta' }"         @click.prevent="setPanel('alta')">Alta</a>
+      <a href="#" class="nav-link" :class="{ active: panel === 'modificacion' }" @click.prevent="setPanel('modificacion')">Modificación</a>
+      <a href="#" class="nav-link" :class="{ active: panel === 'eliminacion' }"  @click.prevent="setPanel('eliminacion')">Eliminación</a>
+      <a href="Catalogo.html" class="nav-link">Ver Catálogo</a>
+      <a href="index.html"    class="nav-link">Volver al Sitio</a>
     </nav>
   </aside>
 
   <main>
 
+    <!-- Barra superior con título del panel activo -->
     <header class="topbar">
-      <span>Gestión de Vehículos &nbsp;/&nbsp; <b id="topbar-title">Alta</b></span>
+      <span>Gestión de Vehículos &nbsp;/&nbsp; <b>{{ panelTitle }}</b></span>
       <span class="dot"></span>
     </header>
 
-    <!-- ALTA -->
-    <section id="alta" class="panel active">
+    <section class="panel" v-show="panel === 'alta'">
       <div class="panel-head">
         <span class="num">01</span>
         <div>
@@ -41,141 +42,278 @@
           <p>Registra un nuevo modelo en el catálogo.</p>
         </div>
       </div>
-      <form action="#" method="POST">
+
+      <div v-if="altaSuccess" class="msg-success">
+        ✓ Vehículo registrado correctamente.
+      </div>
+
+      <form @submit.prevent="submitAlta" novalidate>
+
         <div class="field">
           <label for="a-nombre">Nombre del Vehículo <span>*</span></label>
-          <input type="text" id="a-nombre" name="nombre" placeholder="Ej. Pegassi Zentorno 2025" required />
+          <input type="text" id="a-nombre" v-model.trim="alta.nombre"
+            :class="{ 'input-err': altaErrors.nombre, 'input-ok': altaTouched.nombre && !altaErrors.nombre }"
+            @blur="touchAlta('nombre')" placeholder="Ej. Pegassi Zentorno 2025" />
+          <span class="ferr" v-if="altaErrors.nombre">{{ altaErrors.nombre }}</span>
         </div>
+
         <div class="row">
           <div class="field">
             <label for="a-marca">Marca <span>*</span></label>
-            <input type="text" id="a-marca" name="marca" placeholder="Ej. Pegassi, Übermacht..." required />
+            <input type="text" id="a-marca" v-model.trim="alta.marca"
+              :class="{ 'input-err': altaErrors.marca, 'input-ok': altaTouched.marca && !altaErrors.marca }"
+              @blur="touchAlta('marca')" placeholder="Ej. Pegassi, Übermacht..." />
+            <span class="ferr" v-if="altaErrors.marca">{{ altaErrors.marca }}</span>
           </div>
           <div class="field">
             <label for="a-precio">Precio (USD) <span>*</span></label>
             <div class="prefix-wrap">
               <span>$</span>
-              <input type="number" id="a-precio" name="precio" placeholder="0.00" min="0" step="0.01" required />
+              <input type="number" id="a-precio" v-model.number="alta.precio"
+                :class="{ 'input-err': altaErrors.precio, 'input-ok': altaTouched.precio && !altaErrors.precio }"
+                @blur="touchAlta('precio')" placeholder="0" min="0" />
             </div>
+            <span class="ferr" v-if="altaErrors.precio">{{ altaErrors.precio }}</span>
           </div>
         </div>
+
         <div class="field">
           <label for="a-imagen">URL de Imagen</label>
-          <input type="url" id="a-imagen" name="imagen" placeholder="https://ejemplo.com/imagen.jpg" />
+          <input type="url" id="a-imagen" v-model.trim="alta.imagen"
+            :class="{ 'input-err': altaErrors.imagen }"
+            @blur="touchAlta('imagen')" placeholder="https://ejemplo.com/imagen.jpg" />
+          <span class="ferr" v-if="altaErrors.imagen">{{ altaErrors.imagen }}</span>
         </div>
+
         <div class="field">
-          <label for="a-descripcion">Descripción</label>
-          <textarea id="a-descripcion" name="descripcion" rows="4" placeholder="Motor, características, edición especial..."></textarea>
+          <label for="a-badge">Etiqueta</label>
+          <select id="a-badge" v-model="alta.badge">
+            <option value="">Sin etiqueta</option>
+            <option value="Bestseller">Bestseller</option>
+            <option value="Recién llegado">Recién llegado</option>
+            <option value="Exclusivo">Exclusivo</option>
+            <option value="Premium">Premium</option>
+          </select>
         </div>
+
+        <div class="field">
+          <label for="a-descripcion">Descripción <span>*</span></label>
+          <textarea id="a-descripcion" v-model.trim="alta.descripcion" rows="4"
+            :class="{ 'input-err': altaErrors.descripcion, 'input-ok': altaTouched.descripcion && !altaErrors.descripcion }"
+            @blur="touchAlta('descripcion')" placeholder="Motor, características, edición especial..."></textarea>
+          <span class="ferr" v-if="altaErrors.descripcion">{{ altaErrors.descripcion }}</span>
+        </div>
+
         <div class="actions">
-          <button type="reset" class="btn ghost">Limpiar</button>
+          <button type="button" class="btn ghost" @click="resetAlta">Limpiar</button>
           <button type="submit" class="btn primary">Registrar Vehículo →</button>
         </div>
+
       </form>
     </section>
 
-    <!-- MODIFICACIÓN -->
-    <section id="modificacion" class="panel">
+    <section class="panel" v-show="panel === 'modificacion'">
       <div class="panel-head">
         <span class="num">02</span>
         <div>
           <h1>Modificación de Vehículo</h1>
-          <p>Actualiza los datos de un vehículo existente.</p>
+          <p>Selecciona un vehículo de la lista para editar sus datos.</p>
         </div>
       </div>
-      <div class="search-box">
-        <label>Buscar vehículo por nombre o código</label>
-        <div class="search-row">
-          <input type="text" placeholder="Ej. Zentorno, VH-0042..." />
-          <button type="button" class="btn primary">Buscar</button>
+
+      <!-- Lista para seleccionar qué auto editar -->
+      <div v-if="!editTarget" class="car-list">
+        <p v-if="cars.length === 0" style="color:var(--muted); font-size:0.8rem;">
+          No hay vehículos registrados.
+        </p>
+        <div class="car-list-item" v-for="car in cars" :key="car.id" @click="selectEdit(car)">
+          <span class="cli-nombre">{{ car.nombre }}</span>
+          <span class="cli-marca">{{ car.marca }}</span>
+          <span class="cli-precio">{{ fmtP(car.precio) }}</span>
+          <span class="cli-arrow">→</span>
         </div>
       </div>
-      <form action="#" method="POST">
-        <div class="field">
-          <label for="m-nombre">Nombre del Vehículo <span>*</span></label>
-          <input type="text" id="m-nombre" name="nombre" placeholder="Nombre actual del vehículo" required />
-        </div>
-        <div class="row">
+
+      <!-- Formulario de edición (aparece al seleccionar un auto) -->
+      <div v-if="editTarget">
+        <button type="button" class="btn ghost" style="margin-bottom:1.5rem;" @click="cancelEdit">
+          ← Volver a la lista
+        </button>
+
+        <div v-if="editSuccess" class="msg-success">✓ Cambios guardados correctamente.</div>
+
+        <form @submit.prevent="submitEdit" novalidate>
+
           <div class="field">
-            <label for="m-marca">Marca</label>
-            <input type="text" id="m-marca" name="marca" placeholder="Nueva marca" />
+            <label>Nombre del Vehículo <span>*</span></label>
+            <input type="text" v-model.trim="editForm.nombre"
+              :class="{ 'input-err': editErrors.nombre, 'input-ok': editTouched.nombre && !editErrors.nombre }"
+              @blur="touchEdit('nombre')" />
+            <span class="ferr" v-if="editErrors.nombre">{{ editErrors.nombre }}</span>
           </div>
-          <div class="field">
-            <label for="m-precio">Precio (USD)</label>
-            <div class="prefix-wrap">
-              <span>$</span>
-              <input type="number" id="m-precio" name="precio" placeholder="0.00" min="0" step="0.01" />
+
+          <div class="row">
+            <div class="field">
+              <label>Marca <span>*</span></label>
+              <input type="text" v-model.trim="editForm.marca"
+                :class="{ 'input-err': editErrors.marca, 'input-ok': editTouched.marca && !editErrors.marca }"
+                @blur="touchEdit('marca')" />
+              <span class="ferr" v-if="editErrors.marca">{{ editErrors.marca }}</span>
+            </div>
+            <div class="field">
+              <label>Precio (USD) <span>*</span></label>
+              <div class="prefix-wrap">
+                <span>$</span>
+                <input type="number" v-model.number="editForm.precio"
+                  :class="{ 'input-err': editErrors.precio, 'input-ok': editTouched.precio && !editErrors.precio }"
+                  @blur="touchEdit('precio')" min="0" />
+              </div>
+              <span class="ferr" v-if="editErrors.precio">{{ editErrors.precio }}</span>
             </div>
           </div>
-        </div>
-        <div class="field">
-          <label for="m-imagen">Nueva URL de Imagen</label>
-          <input type="url" id="m-imagen" name="imagen" placeholder="https://ejemplo.com/nueva-imagen.jpg" />
-        </div>
-        <div class="field">
-          <label for="m-descripcion">Nueva Descripción</label>
-          <textarea id="m-descripcion" name="descripcion" rows="4" placeholder="Dejar vacío para no modificar..."></textarea>
-        </div>
-        <div class="actions">
-          <button type="reset" class="btn ghost">Limpiar</button>
-          <button type="submit" class="btn warning">Guardar Cambios →</button>
-        </div>
-      </form>
+
+          <div class="field">
+            <label>URL de Imagen</label>
+            <input type="url" v-model.trim="editForm.imagen"
+              :class="{ 'input-err': editErrors.imagen }"
+              @blur="touchEdit('imagen')" />
+            <span class="ferr" v-if="editErrors.imagen">{{ editErrors.imagen }}</span>
+          </div>
+
+          <div class="field">
+            <label>Etiqueta</label>
+            <select v-model="editForm.badge">
+              <option value="">Sin etiqueta</option>
+              <option value="Bestseller">Bestseller</option>
+              <option value="Recién llegado">Recién llegado</option>
+              <option value="Exclusivo">Exclusivo</option>
+              <option value="Premium">Premium</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Descripción <span>*</span></label>
+            <textarea v-model.trim="editForm.descripcion" rows="4"
+              :class="{ 'input-err': editErrors.descripcion, 'input-ok': editTouched.descripcion && !editErrors.descripcion }"
+              @blur="touchEdit('descripcion')"></textarea>
+            <span class="ferr" v-if="editErrors.descripcion">{{ editErrors.descripcion }}</span>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn ghost" @click="cancelEdit">Cancelar</button>
+            <button type="submit" class="btn warning">Guardar Cambios →</button>
+          </div>
+
+        </form>
+      </div>
     </section>
 
-    <!-- ELIMINACIÓN -->
-    <section id="eliminacion" class="panel">
+    <section class="panel" v-show="panel === 'eliminacion'">
       <div class="panel-head">
         <span class="num">03</span>
         <div>
           <h1>Eliminación de Vehículo</h1>
-          <p>Elimina un vehículo del catálogo de forma permanente.</p>
+          <p>Selecciona el vehículo que deseas eliminar del catálogo.</p>
         </div>
       </div>
+
       <div class="alert">
         <span>⚠</span>
         <p>Esta acción es <strong>irreversible</strong>. Verifica los datos antes de confirmar.</p>
       </div>
-      <form action="#" method="POST">
-        <div class="row">
+
+      <p v-if="cars.length === 0" style="color:var(--muted); font-size:0.8rem;">
+        No hay vehículos registrados.
+      </p>
+
+      <!-- Lista para seleccionar qué auto eliminar -->
+      <div class="car-list" v-if="!deleteTarget">
+        <div class="car-list-item" v-for="car in cars" :key="car.id" @click="selectDelete(car)">
+          <span class="cli-nombre">{{ car.nombre }}</span>
+          <span class="cli-marca">{{ car.marca }}</span>
+          <span class="cli-precio">{{ fmtP(car.precio) }}</span>
+          <span class="cli-arrow" style="color:var(--red);">✕</span>
+        </div>
+      </div>
+
+      <!-- Confirmación de eliminación (aparece al seleccionar un auto) -->
+      <div v-if="deleteTarget">
+        <div class="delete-preview">
+          <p>Vas a eliminar:</p>
+          <strong>{{ deleteTarget.nombre }}</strong>
+          <span>{{ deleteTarget.marca }} · {{ fmtP(deleteTarget.precio) }}</span>
+        </div>
+
+        <form @submit.prevent="confirmDelete" novalidate>
+
           <div class="field">
-            <label for="d-nombre">Nombre del Vehículo <span>*</span></label>
-            <input type="text" id="d-nombre" name="nombre" placeholder="Nombre exacto del vehículo" required />
+            <label for="d-motivo">Motivo <span>*</span></label>
+            <select id="d-motivo" v-model="deleteMotivo"
+              :class="{ 'input-err': deleteErrors.motivo }">
+              <option value="" disabled>Seleccionar motivo</option>
+              <option value="descontinuado">Modelo descontinuado</option>
+              <option value="duplicado">Registro duplicado</option>
+              <option value="error">Error en el alta</option>
+              <option value="vendido">Unidad vendida / sin stock</option>
+              <option value="otro">Otro</option>
+            </select>
+            <span class="ferr" v-if="deleteErrors.motivo">{{ deleteErrors.motivo }}</span>
           </div>
-          <div class="field">
-            <label for="d-marca">Marca <span>*</span></label>
-            <input type="text" id="d-marca" name="marca" placeholder="Confirma la marca" required />
+
+          <div class="confirm-box">
+            <label class="check-label">
+              <input type="checkbox" v-model="deleteConfirmed" />
+              <span class="check"></span>
+              Confirmo que deseo eliminar este vehículo de forma permanente
+            </label>
+            <span class="ferr" v-if="deleteErrors.confirm">{{ deleteErrors.confirm }}</span>
           </div>
-        </div>
-        <div class="field">
-          <label for="d-motivo">Motivo <span>*</span></label>
-          <select id="d-motivo" name="motivo" required>
-            <option value="" disabled selected>Seleccionar motivo</option>
-            <option value="descontinuado">Modelo descontinuado</option>
-            <option value="duplicado">Registro duplicado</option>
-            <option value="error">Error en el alta</option>
-            <option value="vendido">Unidad vendida / sin stock</option>
-            <option value="otro">Otro</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="d-obs">Observaciones</label>
-          <textarea id="d-obs" name="observaciones" rows="3" placeholder="Notas internas sobre la eliminación..."></textarea>
-        </div>
-        <div class="confirm-box">
-          <label class="check-label">
-            <input type="checkbox" required />
-            <span class="check"></span>
-            Confirmo que deseo eliminar este vehículo de forma permanente
-          </label>
-        </div>
-        <div class="actions">
-          <button type="reset" class="btn ghost">Cancelar</button>
-          <button type="submit" class="btn danger">Eliminar Vehículo ✕</button>
-        </div>
-      </form>
+
+          <div class="actions">
+            <button type="button" class="btn ghost" @click="cancelDelete">Cancelar</button>
+            <button type="submit" class="btn danger">Eliminar Vehículo ✕</button>
+          </div>
+
+        </form>
+      </div>
     </section>
 
   </main>
-  </body>
+
+
+  <script src="catalogo-data.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="admin.js"></script>
+
+  <!-- Estilos de feedback de validación (propios del admin) -->
+  <style>
+    .input-err { border-color: #b83a3a !important; box-shadow: 0 0 0 3px rgba(184,58,58,0.08) !important; }
+    .input-ok  { border-color: #5ebd7e !important; }
+    .ferr { font-size:0.65rem; color:#b83a3a; margin-top:0.2rem; display:block; letter-spacing:0.04em; }
+    .msg-success {
+      background: rgba(94,189,126,0.1); border: 1px solid rgba(94,189,126,0.35);
+      color: #2e7d4f; padding: 0.85rem 1.2rem; font-size: 0.8rem;
+      letter-spacing: 0.05em; margin-bottom: 1.5rem;
+    }
+    .car-list { display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1.5rem; }
+    .car-list-item {
+      display:flex; align-items:center; gap:1rem; padding:0.85rem 1.2rem;
+      background:#faf8f5; border:1px solid var(--border); cursor:pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .car-list-item:hover { background:#f0ede8; border-color:var(--gold); }
+    .cli-nombre { flex:1; font-size:0.85rem; font-weight:500; color:var(--text); }
+    .cli-marca  { font-size:0.72rem; color:var(--muted); min-width:90px; }
+    .cli-precio { font-size:0.78rem; color:var(--gold); min-width:100px; text-align:right; }
+    .cli-arrow  { font-size:0.85rem; color:var(--gold); margin-left:0.5rem; }
+    .delete-preview {
+      background:rgba(184,58,58,0.05); border:1px solid rgba(184,58,58,0.2);
+      padding:1.2rem; margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.3rem;
+    }
+    .delete-preview p      { font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; }
+    .delete-preview strong { font-family:var(--font-h); font-size:1.1rem; color:var(--red); }
+    .delete-preview span   { font-size:0.78rem; color:var(--muted); }
+  </style>
+
+</body>
 </html>
