@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Legendary Motorsport — Panel Admin</title>
-  <link rel="stylesheet" href="admin.css" />
+  <title>Legendary Motorsport — Admin</title>
+  <link rel="stylesheet" href="admin.css"/>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -18,21 +18,21 @@
       </div>
     </div>
     <nav>
-      <a href="#" class="nav-link active" data-panel="alta">Alta</a>
-      <a href="#" class="nav-link" data-panel="modificacion">Modificación</a>
-      <a href="#" class="nav-link" data-panel="eliminacion">Eliminación</a>
-      <a href="index.html" class="nav-link">Volver al Sitio</a>
+      <a href="#" class="sidebar-link active" data-panel="alta">Alta</a>
+      <a href="#" class="sidebar-link" data-panel="modificacion">Modificación</a>
+      <a href="#" class="sidebar-link" data-panel="eliminacion">Eliminación</a>
+      <a href="Catalogo.html" class="sidebar-link sidebar-link--back">Ver Catálogo</a>
+      <a href="index.html"    class="sidebar-link sidebar-link--back">Volver al Sitio</a>
     </nav>
   </aside>
 
   <main>
-
     <header class="topbar">
       <span>Gestión de Vehículos &nbsp;/&nbsp; <b id="topbar-title">Alta</b></span>
       <span class="dot"></span>
     </header>
 
-    <!-- ALTA -->
+    <!-- ══ ALTA ══ -->
     <section id="alta" class="panel active">
       <div class="panel-head">
         <span class="num">01</span>
@@ -41,32 +41,48 @@
           <p>Registra un nuevo modelo en el catálogo.</p>
         </div>
       </div>
-      <form action="#" method="POST">
+
+      <form id="form-alta" novalidate>
         <div class="field">
           <label for="a-nombre">Nombre del Vehículo <span>*</span></label>
-          <input type="text" id="a-nombre" name="nombre" placeholder="Ej. Pegassi Zentorno 2025" required />
+          <input type="text" id="a-nombre" name="nombre" placeholder="Ej. Pegassi Zentorno 2025"/>
         </div>
+
         <div class="row">
           <div class="field">
             <label for="a-marca">Marca <span>*</span></label>
-            <input type="text" id="a-marca" name="marca" placeholder="Ej. Pegassi, Übermacht..." required />
+            <input type="text" id="a-marca" name="marca" placeholder="Ej. Pegassi, Progen..."/>
           </div>
           <div class="field">
             <label for="a-precio">Precio (USD) <span>*</span></label>
             <div class="prefix-wrap">
               <span>$</span>
-              <input type="number" id="a-precio" name="precio" placeholder="0.00" min="0" step="0.01" required />
+              <input type="number" id="a-precio" name="precio" placeholder="0" min="1" step="1"/>
             </div>
           </div>
         </div>
+
         <div class="field">
           <label for="a-imagen">URL de Imagen</label>
-          <input type="url" id="a-imagen" name="imagen" placeholder="https://ejemplo.com/imagen.jpg" />
+          <input type="url" id="a-imagen" name="imagen" placeholder="https://ejemplo.com/imagen.png"/>
         </div>
+
         <div class="field">
-          <label for="a-descripcion">Descripción</label>
-          <textarea id="a-descripcion" name="descripcion" rows="4" placeholder="Motor, características, edición especial..."></textarea>
+          <label for="a-etiqueta">Etiqueta</label>
+          <select id="a-etiqueta" name="etiqueta">
+            <option value="">Sin etiqueta</option>
+            <option value="bestseller">Bestseller</option>
+            <option value="recien-llegado">Recién Llegado</option>
+            <option value="exclusivo">Exclusivo</option>
+          </select>
         </div>
+
+        <div class="field">
+          <label for="a-descripcion">Descripción <span>*</span></label>
+          <textarea id="a-descripcion" name="descripcion" rows="3"
+                    placeholder="Motor, características, edición especial..."></textarea>
+        </div>
+
         <div class="actions">
           <button type="reset" class="btn ghost">Limpiar</button>
           <button type="submit" class="btn primary">Registrar Vehículo →</button>
@@ -74,108 +90,98 @@
       </form>
     </section>
 
-    <!-- MODIFICACIÓN -->
+    <!-- ══ MODIFICACIÓN — lista de filas ══ -->
     <section id="modificacion" class="panel">
       <div class="panel-head">
         <span class="num">02</span>
         <div>
           <h1>Modificación de Vehículo</h1>
-          <p>Actualiza los datos de un vehículo existente.</p>
+          <p>Selecciona un vehículo de la lista para editar sus datos.</p>
         </div>
       </div>
-      <div class="search-box">
-        <label>Buscar vehículo por nombre o código</label>
-        <div class="search-row">
-          <input type="text" placeholder="Ej. Zentorno, VH-0042..." />
-          <button type="button" class="btn primary">Buscar</button>
+      <ul class="admin-list" id="edit-list"></ul>
+    </section>
+
+    <!-- ══ EDICIÓN — formulario (se llega desde Modificación) ══ -->
+    <section id="edicion" class="panel">
+      <div class="panel-head">
+        <span class="num">02</span>
+        <div>
+          <h1>Editar Vehículo</h1>
+          <p>Modifica los datos del vehículo seleccionado.</p>
         </div>
       </div>
-      <form action="#" method="POST">
+
+      <form id="form-edicion" novalidate>
+        <input type="hidden" id="e-id"/>
+
         <div class="field">
-          <label for="m-nombre">Nombre del Vehículo <span>*</span></label>
-          <input type="text" id="m-nombre" name="nombre" placeholder="Nombre actual del vehículo" required />
+          <label for="e-nombre">Nombre del Vehículo <span>*</span></label>
+          <input type="text" id="e-nombre" name="nombre"/>
         </div>
+
         <div class="row">
           <div class="field">
-            <label for="m-marca">Marca</label>
-            <input type="text" id="m-marca" name="marca" placeholder="Nueva marca" />
+            <label for="e-marca">Marca <span>*</span></label>
+            <input type="text" id="e-marca" name="marca"/>
           </div>
           <div class="field">
-            <label for="m-precio">Precio (USD)</label>
+            <label for="e-precio">Precio (USD) <span>*</span></label>
             <div class="prefix-wrap">
               <span>$</span>
-              <input type="number" id="m-precio" name="precio" placeholder="0.00" min="0" step="0.01" />
+              <input type="number" id="e-precio" name="precio" min="1" step="1"/>
             </div>
           </div>
         </div>
+
         <div class="field">
-          <label for="m-imagen">Nueva URL de Imagen</label>
-          <input type="url" id="m-imagen" name="imagen" placeholder="https://ejemplo.com/nueva-imagen.jpg" />
+          <label for="e-imagen">URL de Imagen</label>
+          <input type="url" id="e-imagen" name="imagen"/>
         </div>
+
         <div class="field">
-          <label for="m-descripcion">Nueva Descripción</label>
-          <textarea id="m-descripcion" name="descripcion" rows="4" placeholder="Dejar vacío para no modificar..."></textarea>
+          <label for="e-etiqueta">Etiqueta</label>
+          <select id="e-etiqueta" name="etiqueta">
+            <option value="">Sin etiqueta</option>
+            <option value="bestseller">Bestseller</option>
+            <option value="recien-llegado">Recién Llegado</option>
+            <option value="exclusivo">Exclusivo</option>
+          </select>
         </div>
+
+        <div class="field">
+          <label for="e-descripcion">Descripción <span>*</span></label>
+          <textarea id="e-descripcion" name="descripcion" rows="3"></textarea>
+        </div>
+
         <div class="actions">
-          <button type="reset" class="btn ghost">Limpiar</button>
+          <button type="button" class="btn ghost"
+                  onclick="switchPanel('modificacion')">← Cancelar</button>
           <button type="submit" class="btn warning">Guardar Cambios →</button>
         </div>
       </form>
     </section>
 
-    <!-- ELIMINACIÓN -->
+    <!-- ══ ELIMINACIÓN — lista de filas con ✕ ══ -->
     <section id="eliminacion" class="panel">
       <div class="panel-head">
         <span class="num">03</span>
         <div>
           <h1>Eliminación de Vehículo</h1>
-          <p>Elimina un vehículo del catálogo de forma permanente.</p>
+          <p>Selecciona el vehículo que deseas eliminar del catálogo.</p>
         </div>
       </div>
+
       <div class="alert">
         <span>⚠</span>
         <p>Esta acción es <strong>irreversible</strong>. Verifica los datos antes de confirmar.</p>
       </div>
-      <form action="#" method="POST">
-        <div class="row">
-          <div class="field">
-            <label for="d-nombre">Nombre del Vehículo <span>*</span></label>
-            <input type="text" id="d-nombre" name="nombre" placeholder="Nombre exacto del vehículo" required />
-          </div>
-          <div class="field">
-            <label for="d-marca">Marca <span>*</span></label>
-            <input type="text" id="d-marca" name="marca" placeholder="Confirma la marca" required />
-          </div>
-        </div>
-        <div class="field">
-          <label for="d-motivo">Motivo <span>*</span></label>
-          <select id="d-motivo" name="motivo" required>
-            <option value="" disabled selected>Seleccionar motivo</option>
-            <option value="descontinuado">Modelo descontinuado</option>
-            <option value="duplicado">Registro duplicado</option>
-            <option value="error">Error en el alta</option>
-            <option value="vendido">Unidad vendida / sin stock</option>
-            <option value="otro">Otro</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="d-obs">Observaciones</label>
-          <textarea id="d-obs" name="observaciones" rows="3" placeholder="Notas internas sobre la eliminación..."></textarea>
-        </div>
-        <div class="confirm-box">
-          <label class="check-label">
-            <input type="checkbox" required />
-            <span class="check"></span>
-            Confirmo que deseo eliminar este vehículo de forma permanente
-          </label>
-        </div>
-        <div class="actions">
-          <button type="reset" class="btn ghost">Cancelar</button>
-          <button type="submit" class="btn danger">Eliminar Vehículo ✕</button>
-        </div>
-      </form>
+
+      <ul class="admin-list" id="delete-list"></ul>
     </section>
 
   </main>
-  </body>
+
+  <script src="main.js"></script>
+</body>
 </html>

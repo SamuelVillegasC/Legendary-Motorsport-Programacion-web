@@ -1,35 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LEGENDARY MOTORSPORT</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SamuelVillegasC/Legendary-Motorsport-Programacion-web@main/styles.css" />
-  <link href="icons" rel="icons"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-  <header id="header">
-    <div class="header-inner">
-      <img id="header-img" src="LM_Icon.png" alt="LMS Logo"/>
-      <div class="logo-text">LEGENDARY MOTORSPORT</div>
-      <nav id="nav-bar">
-        <a href="Catalogo.html" class="nav-link">Catalogo</a>
-        <a href="Mision.html" class="nav-link">Mision</a>
-        <a href="Vision.html" class="nav-link">Vision</a>
-        <a href="Contacto.html" class="nav-link">Contacto</a>
-        <a href="#coleccion" class="nav-link">Novedades</a>
-      </nav>
-    </div>
-  </header>
+  <header id="header"></header>
 
   <section class="hero">
     <div class="hero-content">
-
       <h1 class="hero-title">Legendary<br/><em>Motorsport</em></h1>
       <h2><span class="hero-subtitle">La elegancia en 4 ruedas</span></h2>
       <p class="hero-desc">Cada vehículo es una obra maestra de ingeniería y diseño, creada para quienes entienden que un coche es mucho más que un medio de transporte.</p>
-      <a href="Catalogo.html" class="btn-primary">Ver Catalogo Completo</a>
+      <a href="Catalogo.html" class="btn-primary">Ver Catálogo Completo</a>
     </div>
     <div class="hero-decoration">
       <div class="circle-lg"></div>
@@ -37,59 +24,16 @@
     </div>
   </section>
 
-  <section id="coleccion">
-    <div class="productos">
-      <div class="producto-card">
-          <div class="producto-img-wrap">
-            <img src="IMAGENCARRO1AQUI" alt="CARRO1"/>
-            <span class="producto-badge">Bestseller</span>
-          </div>
-          <div class="producto-info">
-            <h3>titulo carro aqui</h3>
-            <p>DESCRP. CARRO AQUI</p>
-            <div class="producto-footer">
-              <span class="precio">Previa del precio aqui</span>
-              <button class="btn-buy">Adquirir</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="producto-card featured">
-          <div class="producto-img-wrap">
-            <img src="CARRO2AQUIFT" alt="CARRO 2"/>
-            <span class="producto-badge gold">RECIEN LLEGADO</span>
-          </div>
-          <div class="producto-info">
-            <h3>titulo carro 2 aqui</h3>
-            <p>DESCRP. CARRO 2 AQUI</p>
-            <div class="producto-footer">
-              <span class="precio">previa del precio</span>
-              <button class="btn-buy">Adquirir</button>
-            </div>
-          </div>
-        </div>
+  <!-- Novedades: 2 primeras tarjetas del catálogo (inyectadas por JS) -->
+  <section id="coleccion" class="coleccion" style="background:var(--dark-2)">
+    <div class="section-header">
+      <span class="section-label">— Recién llegados —</span>
+      <h2 style="color:var(--light)">Novedades</h2>
     </div>
+    <div class="productos" id="catalogo-grid"></div>
   </section>
 
-  <footer class="footer">
-    <div class="footer-logo">LEGENDARY</div>
-    <p> 2026 LEGENDARY MOTORSPORT todos los derechos reservados.</p>
-    <p>
-    <div class="productos">
-    <a href="https://jigsaw.w3.org/css-validator/check/referer">
-        <img style="border:0;width:88px;height:31px"
-            src="https://jigsaw.w3.org/css-validator/images/vcss"
-            alt="¡CSS Válido!" />
-    </a>
-    <p>
-    <a href="https://www.w3.org/Icons/valid-html401">
-        <img style="border:0;width:88px;height:31px"
-            src="https://www.w3.org/Icons/valid-html401"
-            alt="¡HTML Válido!" />
-    </a>
-    </p>
-  </div>
-  </footer>
-
+  <footer class="footer"></footer>
+  <script src="main.js"></script>
 </body>
 </html>

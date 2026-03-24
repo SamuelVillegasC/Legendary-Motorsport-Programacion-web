@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css" />
-        <title>Legendary Motorsport - Contacto</title>
-        <span class="hero-subtitle"><h2>LEGNDARY MOTORSPORT - CONTACTENOS</h2></span>
-       <nav id="nav-bar">
-        <a href="Catalogo.html" class="nav-link">Catalogo</a>
-        <a href="index.html" class="nav-link">Volver a inicio</a>
-        </nav>
-       
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Legendary Motorsport — Contacto</title>
+</head>
+<body>
+  <header id="header"></header>
+
   <section id="contacto" class="contacto">
     <div class="contacto-inner">
+
       <div class="contacto-texto">
-        <span class="section-label">— Contactenos en —</span>
-        <span class="hero-subtitle"><h3>Correo: <a href="mailto:LegendaryMtsp@gmail.com">LegendaryMtsp@gmail.com</a></span></h3>
-        <span class="hero-subtitle"><h3>Telefono: <a href="tel:+52826190226">+52 826 190 226</a></h3></span>
-        <h2>Acceso exclusivo</h2>
-        <p>Suscríbase para recibir novedades de nuevas colecciones y eventos privados.</p>
+        <span class="section-label">— Contáctenos —</span>
+        <h2>Estamos para<br/>servirle</h2>
+        <p>
+          <strong>Correo:</strong><br/>
+          <a href="mailto:LegendaryMtsp@gmail.com" style="color:var(--gold)">LegendaryMtsp@gmail.com</a>
+        </p>
+        <br/>
+        <p>
+          <strong>Teléfono:</strong><br/>
+          <a href="tel:+52826190226" style="color:var(--gold)">+52 826 190 226</a>
+        </p>
+        <br/>
+        <p>Suscríbase para recibir novedades de nuevas colecciones y eventos privados exclusivos.</p>
       </div>
-      <form id="form" method="GET">
+
+      <form id="form" action="https://www.freecodecamp.org/email-submit" method="GET" novalidate>
         <label for="email">Correo electrónico</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="su@correo.com"
-          required
-        />
-        <input type="submit" id="submit" value="Suscribirse" />
+        <input type="email" id="email" name="email" placeholder="su@correo.com" required/>
+        <input type="submit" id="submit" value="Suscribirse"/>
       </form>
+
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="footer-logo">LEGENDARY</div>
-    <p> 2026 LEGENDARY MOTORSPORT todos los derechos reservados.</p>
-  </footer>
-
-    </head>
+  <footer class="footer"></footer>
+  <script src="main.js"></script>
+</body>
 </html>

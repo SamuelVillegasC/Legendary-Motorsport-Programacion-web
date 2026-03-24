@@ -1,131 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css" />
-        <title>Legendary Motorsport - Catalogo</title>
-    </head>
-    <body> 
-        <div class="logo-text"><h1>Catalogo</h1></div>
-        <nav id="nav-bar">
-        <a href="index.html" class="nav-link">Volver a inicio</a>
-        <a href="Admin.html" class="nav-link">Administrar Productos</a>
-        </nav>
-        <section id="coleccion" class="coleccion">
-    <div class="section-header">
-      <h2><span class="section-label">— Todos los vehiculos  —</span></h2>
-    </div>
-    <div class="productos">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Legendary Motorsport — Catálogo</title>
+</head>
+<body class="page-catalogo">
 
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="IMAGENCARRO1AQUI" alt="CARRO1"/>
-          <span class="producto-badge">Bestseller</span>
-        </div>
-        <div class="producto-info">
-          <h3>titulo carro aqui</h3>
-          <p>DESCRP. CARRO AQUI</p>
-          <div class="producto-footer">
-            <span class="precio">Previa del precio aqui</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
+  <header id="header"></header>
 
-      <div class="producto-card featured">
-        <div class="producto-img-wrap">
-          <img src="CARRO2AQUIFT" alt="CARRO 2"/>
-          <span class="producto-badge gold">RECIEN LLEGADO</span>
-        </div>
-        <div class="producto-info">
-          <h3>titulo carro 2 aqui</h3>
-          <p>DESCRP. CARRO 2 AQUI</p>
-          <div class="producto-footer">
-            <span class="precio">previa del precio</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO3AQUI" alt="CARRO 3"/>
-        </div>
-        <div class="producto-info">
-          <h3>titulo carro 3 aqui</h3>
-          <p>DESCRP. CARRO 3 AQUI</p>
-          <div class="producto-footer">
-            <span class="precio">Previa del precio</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO4AQUI" alt="CARRO 4"/>
-        </div>
-        <div class="producto-info">
-          <h3>titulo carro 4 aqui</h3>
-          <p>DESCRP. CARRO 4 AQUI</p>
-          <div class="producto-footer">
-            <span class="precio">Previa del precio</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO5AQUI" alt="CARRO 5"/>
-        </div>
-        <div class="producto-info">
-          <h3>titulo carro 5 aqui</h3>
-          <p>DESCRP. CARRO 5 AQUI</p>
-          <div class="producto-footer">
-            <span class="precio">Previa del precio</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO6AQUI" alt="CARRO 6"/>
-        </div>
-        <div class="producto-info">
-          <h3>titulo carro 6 aqui</h3>
-          <p>DESCRP. CARRO 6 AQUI</p>
-          <div class="producto-footer">
-            <span class="precio">Previa del precio</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO7AQUI" alt="CARRO 7"/>
-        </div>
-        <div class="producto-info">
-          <h3>titulo carro 7 aqui</h3>
-          <p>DESCRP. CARRO 7 AQUI</p>
-          <div class="producto-footer">
-            <span class="precio">Previa del precio</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
+  <section class="catalogo-hero">
+    <div class="catalogo-hero-content">
+      <span class="section-label">— Colección Completa —</span>
+      <h1 class="hero-title">Nuestros<br/><em>Vehículos</em></h1>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="footer-logo">LEGENDARY</div>
-    <p> 2026 LEGENDARY MOTORSPORT todos los derechos reservados.</p>
-  </footer>
+  <section id="coleccion" class="coleccion">
+    <div class="section-header">
 
-    </body>
+      <!-- Filtros -->
+      <div class="filtros-bar">
+        <div class="filtro-grupo">
+          <label for="catalogo-search">Buscar</label>
+          <input type="text" id="catalogo-search" placeholder="Nombre o marca..." autocomplete="off"/>
+        </div>
+        <div class="filtro-grupo">
+          <label for="filtro-marca">Marca</label>
+          <select id="filtro-marca">
+            <option value="">Todas las marcas</option>
+          </select>
+        </div>
+        <div class="filtro-grupo">
+          <label for="filtro-precio">Precio</label>
+          <select id="filtro-precio">
+            <option value="">Sin ordenar</option>
+            <option value="asc">Menor a mayor</option>
+            <option value="desc">Mayor a menor</option>
+          </select>
+        </div>
+        <a href="Admin.html" class="btn-admin-link">⚙ Administrar</a>
+      </div>
+
+    </div>
+
+    <!-- Las tarjetas las inyecta main.js -->
+    <div class="productos" id="catalogo-grid"></div>
+
+  </section>
+
+  <footer class="footer"></footer>
+  <script src="main.js"></script>
+</body>
 </html>
