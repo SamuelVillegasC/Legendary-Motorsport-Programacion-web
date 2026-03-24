@@ -1,32 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="styles.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
   <title>Legendary Motorsport — Misión</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-  <header id="header"></header>
+  <!-- ── HEADER ────────────────────────────────────────── -->
+  <header id="header">
+    <div class="header-inner">
+      <div class="logo-text">LEGENDARY MOTORSPORT</div>
+      <nav id="nav-bar">
+        <a href="index.html"    class="nav-link">Inicio</a>
+        <a href="Catalogo.html" class="nav-link">Catálogo</a>
+        <a href="Mision.html"   class="nav-link active-link">Misión</a>
+        <a href="Vision.html"   class="nav-link">Visión</a>
+        <a href="Contacto.html" class="nav-link">Contacto</a>
+      </nav>
+    </div>
+  </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <span class="hero-subtitle">Nuestra Misión</span>
-      <h1 class="hero-title">Lo que<br/><em>nos mueve</em></h1>
-      <p class="hero-desc">
-        Nuestra misión es ofrecer a nuestros clientes una experiencia de compra excepcional,
-        brindando vehículos de alta calidad y un servicio al cliente inigualable.
+  <!-- ── HERO ──────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="hero-subtitle">— Quiénes somos —</span>
+      <div class="divider"></div>
+      <h2>Nuestra <em>Misión</em></h2>
+      <p>
+        Nuestra misión es ofrecer a nuestros clientes una experiencia de compra
+        excepcional, brindando vehículos de alta calidad y un servicio al cliente
+        inigualable.
+        <br/><br/>
         Nos esforzamos por superar las expectativas de nuestros clientes,
-        proporcionando una amplia selección de automóviles,
-        asesoramiento experto y un proceso de compra transparente y sin complicaciones.
+        proporcionando una amplia selección de automóviles, asesoramiento experto
+        y un proceso de compra transparente y sin complicaciones.
       </p>
+      <div class="divider" style="margin-top:2rem;"></div>
+      <a href="Catalogo.html" class="btn-primary" style="margin-top:2rem;">
+        Explorar catálogo
+      </a>
     </div>
   </section>
 
-  <footer class="footer"></footer>
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-logo">LEGENDARY</div>
+    <p>© 2026 LEGENDARY MOTORSPORT — Todos los derechos reservados.</p>
+  </footer>
 
-  <script src="main.js"></script>
 </body>
 </html>
