@@ -2,126 +2,36 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Legendary Motorsport — Contacto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legendary Motorsport &mdash; Contacto</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════
-       HEADER — Barra de navegación fija
-  ═══════════════════════════════════════════════════════ -->
   <header id="header">
     <div class="header-inner">
       <div class="logo-text">LEGENDARY MOTORSPORT</div>
       <nav id="nav-bar">
         <a href="index.html"    class="nav-link">Inicio</a>
-        <a href="Catalogo.html" class="nav-link">Catálogo</a>
-        <a href="Mision.html"   class="nav-link">Misión</a>
-        <a href="Vision.html"   class="nav-link">Visión</a>
+        <a href="Catalogo.html" class="nav-link">Cat&aacute;logo</a>
+        <a href="Mision.html"   class="nav-link">Misi&oacute;n</a>
+        <a href="Vision.html"   class="nav-link">Visi&oacute;n</a>
         <a href="Contacto.html" class="nav-link active-link">Contacto</a>
       </nav>
     </div>
   </header>
 
-  <!-- ══════════════════════════════════════════════════════
-       CONTACTO — Vue app montada en #app-contacto
-       Lógica: contacto.js (validación y suscripción)
-  ═══════════════════════════════════════════════════════ -->
-  <div id="app-contacto">
-    <section class="contacto" style="padding-top:120px;">
-      <div class="contacto-inner">
+  <!-- App contacto: formulario y validación en contacto.js -->
+  <div id="app-contacto"></div>
 
-        <!-- Información de contacto -->
-        <div class="contacto-texto">
-          <span class="section-label">— Contáctenos —</span>
-          <h2>Acceso <em style="font-style:italic; color:var(--gold);">exclusivo</em></h2>
-          <p style="margin-bottom:1.2rem;">
-            Estamos listos para ayudarle a encontrar el vehículo de sus sueños.
-            Comuníquese con nosotros o suscríbase para recibir novedades de
-            nuevas colecciones y eventos privados.
-          </p>
-          <h3>
-            Correo:&nbsp;
-            <a href="mailto:LegendaryMtsp@gmail.com">LegendaryMtsp@gmail.com</a>
-          </h3>
-          <h3 style="margin-top:0.6rem;">
-            Teléfono:&nbsp;
-            <a href="tel:+52826190226">+52 826 190 226</a>
-          </h3>
-        </div>
-
-        <!-- Formulario de suscripción con validación Vue -->
-        <div style="flex:1 1 280px; display:flex; flex-direction:column; gap:0.75rem;">
-
-          <!-- Formulario visible antes de suscribirse -->
-          <div v-if="!subscribed">
-            <label
-              for="email"
-              style="font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
-                     color:var(--dark); font-weight:500; display:block; margin-bottom:0.4rem;"
-            >Correo electrónico</label>
-
-            <input
-              type="email"
-              id="email"
-              v-model.trim="emailInput"
-              :class="{ 'input-error': emailError, 'input-ok': emailOk }"
-              @blur="validateEmail"
-              @input="clearError"
-              placeholder="su@correo.com"
-              style="padding:0.9rem 1.2rem; border:1px solid #ccc; background:#fff;
-                     font-family:var(--font-body); font-size:0.88rem; color:var(--dark);
-                     outline:none; width:100%; transition:border-color 0.35s;"
-            />
-            <span
-              v-if="emailError"
-              style="font-size:0.65rem; color:#b83a3a; margin-top:0.25rem; display:block;"
-            >{{ emailError }}</span>
-
-            <button
-              @click="submitSuscripcion"
-              style="margin-top:0.5rem; padding:0.9rem 2rem; background:var(--dark); color:#fff;
-                     border:none; font-family:var(--font-body); font-size:0.72rem;
-                     letter-spacing:0.2em; text-transform:uppercase; cursor:pointer;
-                     width:100%; font-weight:500; transition:background 0.35s;"
-              @mouseover="e => e.target.style.background='var(--gold)'"
-              @mouseout="e => e.target.style.background='var(--dark)'"
-            >Suscribirse</button>
-          </div>
-
-          <!-- Mensaje de éxito tras suscribirse -->
-          <div v-else class="form-success">
-            ✓ ¡Suscripción exitosa! Le informaremos sobre nuestras novedades.
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="footer-logo">LEGENDARY</div>
-    <p>© 2026 LEGENDARY MOTORSPORT — Todos los derechos reservados.</p>
+    <p>&copy; 2026 LEGENDARY MOTORSPORT &mdash; Todos los derechos reservados.</p>
   </footer>
 
-  <!-- ══════════════════════════════════════════════════════
-       SCRIPTS — Orden de carga:
-       1. Vue 3 (CDN)   → framework
-       2. contacto.js   → lógica Vue de esta página
-  ═══════════════════════════════════════════════════════ -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="contacto.js"></script>
-
-  <style>
-    .input-error { border-color: #b83a3a !important; }
-    .input-ok    { border-color: #5ebd7e !important; }
-  </style>
 
 </body>
 </html>

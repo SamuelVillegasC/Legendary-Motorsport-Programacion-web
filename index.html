@@ -2,149 +2,53 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEGENDARY MOTORSPORT</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════
-       HEADER — Barra de navegación fija
-  ═══════════════════════════════════════════════════════ -->
   <header id="header">
     <div class="header-inner">
       <div class="logo-text">LEGENDARY MOTORSPORT</div>
       <nav id="nav-bar">
         <a href="index.html"    class="nav-link active-link">Inicio</a>
-        <a href="Catalogo.html" class="nav-link">Catálogo</a>
-        <a href="Mision.html"   class="nav-link">Misión</a>
-        <a href="Vision.html"   class="nav-link">Visión</a>
+        <a href="Catalogo.html" class="nav-link">Cat&aacute;logo</a>
+        <a href="Mision.html"   class="nav-link">Misi&oacute;n</a>
+        <a href="Vision.html"   class="nav-link">Visi&oacute;n</a>
         <a href="Contacto.html" class="nav-link">Contacto</a>
       </nav>
     </div>
   </header>
 
-  <!-- ══════════════════════════════════════════════════════
-       HERO — Sección principal
-  ═══════════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-content">
-      <h1 class="hero-title">Legendary<br/><em>Motorsport</em></h1>
+      <h1 class="hero-title">Legendary<br /><em>Motorsport</em></h1>
       <span class="hero-subtitle">La elegancia en 4 ruedas</span>
       <p class="hero-desc">
-        Cada vehículo es una obra maestra de ingeniería y diseño, creada
-        para quienes entienden que un coche es mucho más que un medio de transporte.
+        Cada veh&iacute;culo es una obra maestra de ingenier&iacute;a y dise&ntilde;o, creada
+        para quienes entienden que un coche es mucho m&aacute;s que un medio de transporte.
       </p>
-      <a href="Catalogo.html" class="btn-primary">Ver Catálogo Completo</a>
+      <a href="Catalogo.html" class="btn-primary">Ver Cat&aacute;logo Completo</a>
     </div>
-    <div class="hero-decoration">
+    <div class="hero-decoration" aria-hidden="true">
       <div class="circle-lg"></div>
       <div class="circle-sm"></div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       ESTADÍSTICAS — Vue app montada en #app-stats
-       Lógica: index.js → App 1 (contadores animados)
-  ═══════════════════════════════════════════════════════ -->
-  <div id="app-stats">
-    <section class="stats-section">
-      <div class="stats-inner">
+  <!-- App 1: contadores — lógica y template en index.js -->
+  <div id="app-stats"></div>
 
-        <div class="stat-item">
-          <span class="stat-number">{{ displayVehiculos }}</span>
-          <span class="stat-label">Vehículos disponibles</span>
-        </div>
+  <!-- App 2: novedades — lógica y template en index.js -->
+  <div id="app-novedades"></div>
 
-        <div class="stat-item">
-          <span class="stat-number">{{ displayMarcas }}</span>
-          <span class="stat-label">Marcas exclusivas</span>
-        </div>
-
-        <div class="stat-item">
-          <span class="stat-number">{{ displayAnios }}+</span>
-          <span class="stat-label">Años de experiencia</span>
-        </div>
-
-        <div class="stat-item">
-          <span class="stat-number">{{ displayClientes }}</span>
-          <span class="stat-label">Clientes satisfechos</span>
-        </div>
-
-      </div>
-    </section>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════
-       NOVEDADES — Vue app montada en #app-novedades
-       Lógica: index.js → App 2 (últimos autos del catálogo)
-  ═══════════════════════════════════════════════════════ -->
-  <div id="app-novedades">
-    <section class="coleccion-dark">
-
-      <div class="section-header" style="margin-bottom:2.5rem;">
-        <span class="section-label">— Últimas incorporaciones —</span>
-        <h2 style="color:var(--light); font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); font-weight:300;">
-          Novedades
-        </h2>
-      </div>
-
-      <!-- Tarjetas generadas dinámicamente desde el catálogo -->
-      <div class="productos" v-if="featuredCars.length > 0">
-        <div
-          class="producto-card"
-          v-for="car in featuredCars"
-          :key="car.id"
-          :class="{ featured: car.badge === 'Exclusivo' || car.badge === 'Premium' }"
-        >
-          <div class="producto-img-wrap">
-            <img :src="car.imagen" :alt="car.nombre" />
-            <span
-              v-if="car.badge"
-              class="producto-badge"
-              :class="{ gold: car.badge === 'Recién llegado' || car.badge === 'Exclusivo' }"
-            >{{ car.badge }}</span>
-          </div>
-          <div class="producto-info">
-            <span class="producto-marca">{{ car.marca }}</span>
-            <h3>{{ car.nombre }}</h3>
-            <p>{{ car.descripcion }}</p>
-            <div class="producto-footer">
-              <span class="precio">{{ formatPrice(car.precio) }}</span>
-              <a href="Catalogo.html" class="btn-buy">Ver más</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div v-else style="text-align:center; padding:3rem; color:var(--text-muted);">
-        <p style="font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase;">
-          Catálogo en preparación
-        </p>
-      </div>
-
-      <div style="text-align:center; margin-top:2.5rem;">
-        <a href="Catalogo.html" class="btn-primary">Ver catálogo completo</a>
-      </div>
-
-    </section>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="footer-logo">LEGENDARY</div>
-    <p>© 2026 LEGENDARY MOTORSPORT — Todos los derechos reservados.</p>
+    <p>&copy; 2026 LEGENDARY MOTORSPORT &mdash; Todos los derechos reservados.</p>
   </footer>
 
-  <!-- ══════════════════════════════════════════════════════
-       SCRIPTS — Orden de carga:
-       1. catalogo-data.js  → datos y helpers de localStorage
-       2. Vue 3 (CDN)       → framework
-       3. index.js          → lógica Vue de esta página
-  ═══════════════════════════════════════════════════════ -->
   <script src="catalogo-data.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="index.js"></script>

@@ -1,8 +1,3 @@
-/* ============================================================
-   catalogo-data.js  —  Legendary Motorsport
-   Datos iniciales y helpers de localStorage
-   ============================================================ */
-
 const LM_KEY = 'lm_catalogo';
 
 const INITIAL_CARS = [
@@ -71,7 +66,7 @@ const INITIAL_CARS = [
   }
 ];
 
-/* Carga desde localStorage; si está vacío, inicializa con los datos base */
+/* Carga desde localStorage*/
 function getCars() {
   const raw = localStorage.getItem(LM_KEY);
   if (!raw) {

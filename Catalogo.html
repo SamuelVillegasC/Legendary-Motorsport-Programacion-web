@@ -2,137 +2,34 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Legendary Motorsport — Catálogo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legendary Motorsport &mdash; Cat&aacute;logo</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════
-       HEADER — Barra de navegación fija
-  ═══════════════════════════════════════════════════════ -->
   <header id="header">
     <div class="header-inner">
       <div class="logo-text">LEGENDARY MOTORSPORT</div>
       <nav id="nav-bar">
         <a href="index.html"    class="nav-link">Inicio</a>
-        <a href="Catalogo.html" class="nav-link active-link">Catálogo</a>
-        <a href="Mision.html"   class="nav-link">Misión</a>
-        <a href="Vision.html"   class="nav-link">Visión</a>
+        <a href="Catalogo.html" class="nav-link active-link">Cat&aacute;logo</a>
+        <a href="Mision.html"   class="nav-link">Misi&oacute;n</a>
+        <a href="Vision.html"   class="nav-link">Visi&oacute;n</a>
         <a href="Contacto.html" class="nav-link">Contacto</a>
       </nav>
     </div>
   </header>
 
-  <!-- ══════════════════════════════════════════════════════
-       CATÁLOGO — Vue app montada en #app-catalogo
-       Lógica: catalogo.js (búsqueda, filtros, tarjetas)
-  ═══════════════════════════════════════════════════════ -->
-  <div id="app-catalogo">
-    <section class="coleccion">
+  <!-- App catálogo: lógica, filtros y template en catalogo.js -->
+  <div id="app-catalogo"></div>
 
-      <!-- Encabezado de sección -->
-      <div class="section-header">
-        <span class="section-label">— Legendary Motorsport —</span>
-        <h2>Todos los Vehículos</h2>
-      </div>
-
-      <!-- Barra de búsqueda y botones de filtro por marca -->
-      <div class="search-filter-bar">
-        <div class="search-input-wrap">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          <input
-            class="search-input"
-            type="text"
-            v-model="searchQuery"
-            placeholder="Buscar por nombre, marca o descripción..."
-          />
-        </div>
-
-        <div class="filter-tags">
-          <button
-            class="filter-tag"
-            :class="{ active: selectedBrand === '' }"
-            @click="selectedBrand = ''"
-          >Todas</button>
-
-          <button
-            class="filter-tag"
-            v-for="brand in brands"
-            :key="brand"
-            :class="{ active: selectedBrand === brand }"
-            @click="selectedBrand = brand"
-          >{{ brand }}</button>
-        </div>
-      </div>
-
-      <!-- Contador de resultados -->
-      <p class="results-count">
-        {{ filteredCars.length }}
-        vehículo{{ filteredCars.length !== 1 ? 's' : '' }}
-        encontrado{{ filteredCars.length !== 1 ? 's' : '' }}
-      </p>
-
-      <!-- Grid de tarjetas de vehículos -->
-      <div class="productos">
-
-        <div
-          class="producto-card"
-          v-for="car in filteredCars"
-          :key="car.id"
-          :class="{ featured: car.badge === 'Premium' || car.badge === 'Exclusivo' }"
-        >
-          <div class="producto-img-wrap">
-            <img :src="car.imagen" :alt="car.nombre" loading="lazy" />
-            <span
-              v-if="car.badge"
-              class="producto-badge"
-              :class="{ gold: car.badge === 'Recién llegado' || car.badge === 'Exclusivo' }"
-            >{{ car.badge }}</span>
-          </div>
-          <div class="producto-info">
-            <span class="producto-marca">{{ car.marca }}</span>
-            <h3>{{ car.nombre }}</h3>
-            <p>{{ car.descripcion }}</p>
-            <div class="producto-footer">
-              <span class="precio">{{ formatPrice(car.precio) }}</span>
-              <button class="btn-buy" @click="contactar(car.nombre)">Adquirir</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mensaje si la búsqueda no tiene resultados -->
-        <div class="no-results" v-if="filteredCars.length === 0">
-          <p>Sin resultados para "{{ searchQuery }}"</p>
-        </div>
-
-      </div>
-
-      <!-- Enlace al panel de administración -->
-      <div style="text-align:center; margin-top:3rem;">
-        <a href="Admin.html" class="btn-primary">Administrar catálogo →</a>
-      </div>
-
-    </section>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="footer-logo">LEGENDARY</div>
-    <p>© 2026 LEGENDARY MOTORSPORT — Todos los derechos reservados.</p>
+    <p>&copy; 2026 LEGENDARY MOTORSPORT &mdash; Todos los derechos reservados.</p>
   </footer>
 
-  <!-- ══════════════════════════════════════════════════════
-       SCRIPTS — Orden de carga:
-       1. catalogo-data.js  → datos y helpers de localStorage
-       2. Vue 3 (CDN)       → framework
-       3. catalogo.js       → lógica Vue de esta página
-  ═══════════════════════════════════════════════════════ -->
   <script src="catalogo-data.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="catalogo.js"></script>
