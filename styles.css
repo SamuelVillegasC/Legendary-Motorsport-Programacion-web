@@ -624,12 +624,6 @@ body {
   }
 }
 
-/* ============================================================
-   PEGAR AL FINAL DE styles.css
-   Estilos: tarjetas v-card, filtros, nav activo,
-   hamburger, validaciones, toast, admin filas
-   ============================================================ */
-
 /* ── Fondo negro para el catálogo ── */
 .page-catalogo {
   background-color: #000;
