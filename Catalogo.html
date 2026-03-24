@@ -7,133 +7,51 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
   <title>Legendary Motorsport — Catálogo</title>
 </head>
-<body>
+<body class="page-catalogo">
 
   <header id="header"></header>
 
-  <section id="coleccion" class="coleccion">
-    <div class="section-header">
-      <span class="section-label">— Todos los vehículos —</span>
-      <h2>Catálogo Completo</h2>
-
-      <!-- Buscador: main.js lo activa automáticamente -->
-      <div class="catalogo-search-wrap">
-        <input
-          type="text"
-          id="catalogo-search"
-          placeholder="Buscar por nombre, marca, precio..."
-          autocomplete="off"
-        />
-      </div>
-    </div>
-
-    <div class="productos">
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="IMAGENCARRO1AQUI" alt="CARRO1"/>
-          <span class="producto-badge">Bestseller</span>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro aquí</h3>
-          <p>Descripción del vehículo aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card featured">
-        <div class="producto-img-wrap">
-          <img src="CARRO2AQUIFT" alt="CARRO 2"/>
-          <span class="producto-badge gold">RECIÉN LLEGADO</span>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro 2 aquí</h3>
-          <p>Descripción del vehículo 2 aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO3AQUI" alt="CARRO 3"/>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro 3 aquí</h3>
-          <p>Descripción del vehículo 3 aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO4AQUI" alt="CARRO 4"/>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro 4 aquí</h3>
-          <p>Descripción del vehículo 4 aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO5AQUI" alt="CARRO 5"/>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro 5 aquí</h3>
-          <p>Descripción del vehículo 5 aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO6AQUI" alt="CARRO 6"/>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro 6 aquí</h3>
-          <p>Descripción del vehículo 6 aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="CARRO7AQUI" alt="CARRO 7"/>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro 7 aquí</h3>
-          <p>Descripción del vehículo 7 aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
+  <section class="catalogo-hero">
+    <div class="catalogo-hero-content">
+      <span class="section-label">— Colección Completa —</span>
+      <h1 class="hero-title">Nuestros<br/><em>Vehículos</em></h1>
     </div>
   </section>
 
-  <footer class="footer"></footer>
+  <section id="coleccion" class="coleccion">
+    <div class="section-header">
 
+      <!-- Filtros -->
+      <div class="filtros-bar">
+        <div class="filtro-grupo">
+          <label for="catalogo-search">Buscar</label>
+          <input type="text" id="catalogo-search" placeholder="Nombre o marca..." autocomplete="off"/>
+        </div>
+        <div class="filtro-grupo">
+          <label for="filtro-marca">Marca</label>
+          <select id="filtro-marca">
+            <option value="">Todas las marcas</option>
+          </select>
+        </div>
+        <div class="filtro-grupo">
+          <label for="filtro-precio">Precio</label>
+          <select id="filtro-precio">
+            <option value="">Sin ordenar</option>
+            <option value="asc">Menor a mayor</option>
+            <option value="desc">Mayor a menor</option>
+          </select>
+        </div>
+        <a href="Admin.html" class="btn-admin-link">⚙ Administrar</a>
+      </div>
+
+    </div>
+
+    <!-- Las tarjetas las inyecta main.js -->
+    <div class="productos" id="catalogo-grid"></div>
+
+  </section>
+
+  <footer class="footer"></footer>
   <script src="main.js"></script>
 </body>
 </html>

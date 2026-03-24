@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LEGENDARY MOTORSPORT</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -24,42 +24,16 @@
     </div>
   </section>
 
-  <section id="coleccion">
-    <div class="productos">
-      <div class="producto-card">
-        <div class="producto-img-wrap">
-          <img src="IMAGENCARRO1AQUI" alt="CARRO1"/>
-          <span class="producto-badge">Bestseller</span>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro aquí</h3>
-          <p>Descripción del vehículo aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card featured">
-        <div class="producto-img-wrap">
-          <img src="CARRO2AQUIFT" alt="CARRO 2"/>
-          <span class="producto-badge gold">RECIÉN LLEGADO</span>
-        </div>
-        <div class="producto-info">
-          <h3>Titulo carro 2 aquí</h3>
-          <p>Descripción del vehículo 2 aquí.</p>
-          <div class="producto-footer">
-            <span class="precio">$000,000</span>
-            <button class="btn-buy">Adquirir</button>
-          </div>
-        </div>
-      </div>
+  <!-- Novedades: 2 primeras tarjetas del catálogo (inyectadas por JS) -->
+  <section id="coleccion" class="coleccion" style="background:var(--dark-2)">
+    <div class="section-header">
+      <span class="section-label">— Recién llegados —</span>
+      <h2 style="color:var(--light)">Novedades</h2>
     </div>
+    <div class="productos" id="catalogo-grid"></div>
   </section>
 
   <footer class="footer"></footer>
-
   <script src="main.js"></script>
 </body>
 </html>
