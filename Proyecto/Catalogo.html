@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legendary Motorsport &mdash; Cat&aacute;logo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
+</head>
+<body>
+
+  <header id="header"></header>
+
+  <!-- App catálogo: lógica, filtros y template en catalogo.js -->
+  <div id="app-catalogo"></div>
+
+  <footer class="footer" id="footer"></footer>
+  <script src="js/catalogo-data.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="js/components.js"></script>
+<script>
+  renderHeader('Catalogo.html');
+  renderFooter();
+</script>
+
+</body>
+</html>
