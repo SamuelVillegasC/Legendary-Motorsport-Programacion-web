@@ -4,23 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legendary Motorsport &mdash; Visi&oacute;n</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
 <body>
 
-  <header id="header">
-    <div class="header-inner">
-      <div class="logo-text">LEGENDARY MOTORSPORT</div>
-      <nav id="nav-bar">
-        <a href="index.html"    class="nav-link">Inicio</a>
-        <a href="Catalogo.html" class="nav-link">Cat&aacute;logo</a>
-        <a href="Mision.html"   class="nav-link">Misi&oacute;n</a>
-        <a href="Vision.html"   class="nav-link active-link">Visi&oacute;n</a>
-        <a href="Contacto.html" class="nav-link">Contacto</a>
-      </nav>
-    </div>
-  </header>
+  <header id="header"></header>
 
   <section class="page-hero">
     <div class="page-hero-content">
@@ -42,10 +31,13 @@
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="footer-logo">LEGENDARY</div>
-    <p>&copy; 2026 LEGENDARY MOTORSPORT &mdash; Todos los derechos reservados.</p>
-  </footer>
+  <footer class="footer" id="footer"></footer>
+
+  <script src="js/components.js"></script>
+<script>
+  renderHeader('Vision.html');
+  renderFooter();
+</script>
 
 </body>
 </html>
