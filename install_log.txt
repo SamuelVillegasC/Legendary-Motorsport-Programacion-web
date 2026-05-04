@@ -1,0 +1,19 @@
+Collecting django
+  Using cached django-6.0.4-py3-none-any.whl.metadata (3.9 kB)
+Collecting psycopg2-binary
+  Using cached psycopg2_binary-2.9.12-cp313-cp313-win_amd64.whl.metadata (5.1 kB)
+Collecting django-sslserver
+  Using cached django_sslserver-0.22-py3-none-any.whl.metadata (1.1 kB)
+Collecting asgiref>=3.9.1 (from django)
+  Using cached asgiref-3.11.1-py3-none-any.whl.metadata (9.3 kB)
+Collecting sqlparse>=0.5.0 (from django)
+  Using cached sqlparse-0.5.5-py3-none-any.whl.metadata (4.7 kB)
+Collecting tzdata (from django)
+  Using cached tzdata-2026.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Using cached django-6.0.4-py3-none-any.whl (8.4 MB)
+Using cached psycopg2_binary-2.9.12-cp313-cp313-win_amd64.whl (2.8 MB)
+Using cached django_sslserver-0.22-py3-none-any.whl (10 kB)
+Using cached asgiref-3.11.1-py3-none-any.whl (24 kB)
+Using cached sqlparse-0.5.5-py3-none-any.whl (46 kB)
+Using cached tzdata-2026.2-py2.py3-none-any.whl (349 kB)
+Installing collected packages: tzdata, sqlparse, psycopg2-binary, asgiref, django, django-sslserver
