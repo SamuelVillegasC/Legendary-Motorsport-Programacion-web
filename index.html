@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEGENDARY MOTORSPORT</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
+</head>
+<body>
+
+  <header id="header"></header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Legendary<br /><em>Motorsport</em></h1>
+      <span class="hero-subtitle">La elegancia en 4 ruedas</span>
+      <p class="hero-desc">
+        Cada veh&iacute;culo es una obra maestra de ingenier&iacute;a y dise&ntilde;o, creada
+        para quienes entienden que un coche es mucho m&aacute;s que un medio de transporte.
+      </p>
+      <a href="Catalogo.html" class="btn-primary">Ver Cat&aacute;logo Completo</a>
+    </div>
+    <div class="hero-decoration" aria-hidden="true">
+      <div class="circle-lg"></div>
+      <div class="circle-sm"></div>
+    </div>
+  </section>
+
+  <!-- App 1: contadores — lógica y template en index.js -->
+  <div id="app-stats"></div>
+
+  <!-- App 2: novedades — lógica y template en index.js -->
+  <div id="app-novedades"></div>
+
+  <footer class="footer" id="footer"></footer>
+
+  <script src="js/catalogo-data.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/components.js"></script>
+<script>
+  renderHeader('index.html');
+  renderFooter();
+</script>
+
+</body>
+</html>
