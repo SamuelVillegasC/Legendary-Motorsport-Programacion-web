@@ -1,15 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legendary Motorsport &mdash; Visi&oacute;n</title>
-  <link rel="stylesheet" href="{% static 'catalogo/css/styles.css' %}" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
-
 <body>
 
   <header id="header"></header>
@@ -28,7 +26,7 @@
         la regi&oacute;n.
       </p>
       <div class="divider divider-mt"></div>
-      <a href="/catalogo/" class="btn-primary btn-primary-mt">
+      <a href="Catalogo.html" class="btn-primary btn-primary-mt">
         Explorar cat&aacute;logo
       </a>
     </div>
@@ -36,12 +34,11 @@
 
   <footer class="footer" id="footer"></footer>
 
-  <script src="{% static 'catalogo/js/components.js' %}"></script>
-  <script>
-    renderHeader('Vision.html');
-    renderFooter();
-  </script>
+  <script src="{%static 'js/components.js'%}"></script>
+<script>
+  renderHeader('Vision.html');
+  renderFooter();
+</script>
 
 </body>
-
 </html>

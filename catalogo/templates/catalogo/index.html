@@ -1,15 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEGENDARY MOTORSPORT</title>
-  <link rel="stylesheet" href="{% static 'catalogo/css/styles.css' %}" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
-
 <body>
 
   <header id="header"></header>
@@ -22,7 +20,7 @@
         Cada veh&iacute;culo es una obra maestra de ingenier&iacute;a y dise&ntilde;o, creada
         para quienes entienden que un coche es mucho m&aacute;s que un medio de transporte.
       </p>
-      <a href="/catalogo/" class="btn-primary">Ver Cat&aacute;logo Completo</a>
+      <a href="Catalogo.html" class="btn-primary">Ver Cat&aacute;logo Completo</a>
     </div>
     <div class="hero-decoration" aria-hidden="true">
       <div class="circle-lg"></div>
@@ -38,15 +36,14 @@
 
   <footer class="footer" id="footer"></footer>
 
-  <script src="{% static 'catalogo/js/catalogo-data.js' %}"></script>
+  <script src="{%static 'js/catalogo-data.js'%}"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <script src="{% static 'catalogo/js/index.js' %}"></script>
-  <script src="{% static 'catalogo/js/components.js' %}"></script>
-  <script>
-    renderHeader('index.html');
-    renderFooter();
-  </script>
+  <script src="{%static 'js/index.js'%}"></script>
+  <script src="{%static 'js/components.js'%}"></script>
+<script>
+  renderHeader('index.html');
+  renderFooter();
+</script>
 
 </body>
-
 </html>

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legendary Motorsport &mdash; Panel Admin</title>
-  <link rel="stylesheet" href="{% static 'catalogo/css/admin.css' %}" />
+  <link rel="stylesheet" href="css/admin.css" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=Syne:wght@400;700;800&amp;display=swap" />
 </head>
@@ -14,9 +15,9 @@
 
   <div id="app-admin"></div>
 
-  <script src="{% static 'catalogo/js/catalogo-data.js' %}"></script>
+  <script src="{%static 'catalogo/js/catalogo-data.js'%}"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <script src="{% static 'catalogo/js/admin.js' %}"></script>
+  <script src="{%static 'admin/js/admin.js'%}"></script>
 
 </body>
 
