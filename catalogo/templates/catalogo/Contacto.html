@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legendary Motorsport &mdash; Contacto</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
+  <link rel="stylesheet" href="{% static 'catalogo/css/styles.css' %}" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
+
 <body>
 
   <header id="header"></header>
@@ -17,12 +20,13 @@
   <footer class="footer" id="footer"></footer>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <script src="js/contacto.js"></script>
-  <script src="js/components.js"></script>
-<script>
-  renderHeader('Contacto.html');
-  renderFooter();
-</script>
+  <script src="{% static 'catalogo/js/contacto.js' %}"></script>
+  <script src="{% static 'catalogo/js/components.js' %}"></script>
+  <script>
+    renderHeader('Contacto.html');
+    renderFooter();
+  </script>
 
 </body>
+
 </html>
