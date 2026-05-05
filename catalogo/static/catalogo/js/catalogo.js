@@ -110,7 +110,7 @@ createApp({
       </div>
 
       <div class="catalogo-cta">
-        <a href="Admin.html" class="btn-primary">Administrar catálogo →</a>
+        <a href="/admin/" class="btn-primary">Administrar catálogo →</a>
       </div>
 
     </section>

@@ -105,7 +105,7 @@ createApp({
             <p>{{ car.descripcion }}</p>
             <div class="producto-footer">
               <span class="precio">{{ formatPrice(car.precio) }}</span>
-              <a href="Catalogo.html" class="btn-buy">Ver más</a>
+              <a href="/catalogo/" class="btn-buy">Ver más</a>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ createApp({
       </div>
 
       <div class="novedades-cta">
-        <a href="Catalogo.html" class="btn-primary">Ver catálogo completo</a>
+        <a href="/catalogo/" class="btn-primary">Ver catálogo completo</a>
       </div>
     </section>
   `,

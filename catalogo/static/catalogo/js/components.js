@@ -4,9 +4,9 @@ function renderHeader(paginaActiva) {
   const links = [
     { href: '/', label: 'Inicio' },
     { href: '/catalogo/', label: 'Catálogo' },
-    { href: '/Mision/', label: 'Misión' },
-    { href: '/Vision/', label: 'Visión' },
-    { href: '/Contacto/', label: 'Contacto' }
+    { href: '/mision/', label: 'Misión' },
+    { href: '/vision/', label: 'Visión' },
+    { href: '/contacto/', label: 'Contacto' }
   ];
 
   const navLinks = links.map(link => {
