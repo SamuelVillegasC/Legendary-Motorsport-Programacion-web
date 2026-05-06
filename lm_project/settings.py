@@ -124,7 +124,7 @@ STATIC_URL = 'static/'
 
 import os
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'catalogo/static'),
 ]
 
 AUTH_USER_MODEL = 'catalogo.CustomUser'

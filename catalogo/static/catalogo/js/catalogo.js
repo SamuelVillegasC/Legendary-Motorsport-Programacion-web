@@ -2,9 +2,9 @@ const { createApp } = Vue;
 
 /* Rangos disponibles para el filtro de precio */
 const PRECIO_RANGOS = {
-  low:  { min: 0,       max: 1000000  }, 
-  mid:  { min: 1000000, max: 2000000  },
-  high: { min: 2000000, max: Infinity }  
+  low: { min: 0, max: 1000000 },
+  mid: { min: 1000000, max: 2000000 },
+  high: { min: 2000000, max: Infinity }
 };
 
 createApp({
@@ -110,7 +110,7 @@ createApp({
       </div>
 
       <div class="catalogo-cta">
-        <a href="/admin/" class="btn-primary">Administrar catálogo →</a>
+        <a href="/CRUD/" class="btn-primary">Administrar catálogo →</a>
       </div>
 
     </section>
@@ -118,8 +118,8 @@ createApp({
 
   data() {
     return {
-      cars:          [],
-      searchQuery:   '',
+      cars: [],
+      searchQuery: '',
       selectedBrand: '',
       selectedPrice: ''
     };
@@ -140,10 +140,10 @@ createApp({
       const rango = PRECIO_RANGOS[this.selectedPrice] || null;
 
       return this.cars.filter(car => {
-        const coincideMarca  = this.selectedBrand === '' || car.marca === this.selectedBrand;
-        const coincideTexto  = query === '' ||
-          car.nombre.toLowerCase().includes(query)      ||
-          car.marca.toLowerCase().includes(query)       ||
+        const coincideMarca = this.selectedBrand === '' || car.marca === this.selectedBrand;
+        const coincideTexto = query === '' ||
+          car.nombre.toLowerCase().includes(query) ||
+          car.marca.toLowerCase().includes(query) ||
           car.descripcion.toLowerCase().includes(query);
         const coincidePrecio = rango === null ||
           (car.precio >= rango.min && car.precio < rango.max);
