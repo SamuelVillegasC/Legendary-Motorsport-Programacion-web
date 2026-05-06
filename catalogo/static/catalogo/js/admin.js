@@ -25,8 +25,8 @@ createApp({
            @click.prevent="setPanel('modificacion')">Modificación</a>
         <a href="#" class="nav-link" :class="{ active: panel === 'eliminacion' }"
            @click.prevent="setPanel('eliminacion')">Eliminación</a>
-        <a href="Catalogo.html" class="nav-link">Ver Catálogo</a>
-        <a href="index.html"    class="nav-link">Volver al Sitio</a>
+        <a href="/catalogo/" class="nav-link">Ver Catálogo</a>
+        <a href="/"    class="nav-link">Volver al Sitio</a>
       </nav>
     </aside>
 

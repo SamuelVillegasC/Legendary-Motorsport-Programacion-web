@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'LM_db',
         'USER': 'postgres',
-        'PASSWORD': 'Sdylan34',
+        'PASSWORD': 'S4m261005',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -124,7 +124,7 @@ STATIC_URL = 'static/'
 
 import os
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'catalogo/static'),
 ]
 
 AUTH_USER_MODEL = 'catalogo.CustomUser'

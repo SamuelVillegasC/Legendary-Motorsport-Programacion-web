@@ -2,11 +2,11 @@
 
 function renderHeader(paginaActiva) {
   const links = [
-    { href: 'index.html',    label: 'Inicio' },
-    { href: 'Catalogo.html', label: 'Catálogo' },
-    { href: 'Mision.html',   label: 'Misión' },
-    { href: 'Vision.html',   label: 'Visión' },
-    { href: 'Contacto.html', label: 'Contacto' }
+    { href: '/', label: 'Inicio' },
+    { href: '/catalogo/', label: 'Catálogo' },
+    { href: '/mision/', label: 'Misión' },
+    { href: '/vision/', label: 'Visión' },
+    { href: '/contacto/', label: 'Contacto' }
   ];
 
   const navLinks = links.map(link => {

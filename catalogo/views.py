@@ -23,7 +23,7 @@ def vision_view(request):
 
 @staff_member_required
 def admin_view(request):
-    return render(request, 'catalogo/Admin.html')
+    return render(request, 'catalogo/CRUD.html')
 
 def check_username(request):
     username = request.GET.get('username', None)
