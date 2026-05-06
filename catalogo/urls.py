@@ -10,4 +10,8 @@ urlpatterns = [
     path('CRUD/', views.admin_view, name='admin'),
     path('api/check_username/', views.check_username, name='check_username'),
     path('api/check_product_name/', views.check_product_name, name='check_product_name'),
+    path('api/vehiculos/', views.get_vehiculos, name='get_vehiculos'),
+    path('crear_auto/', views.crear_auto, name='crear_auto'),
+    path('editar_auto/<int:vehiculo_id>/', views.editar_auto, name='editar_auto'),
+    path('eliminar_auto/<int:vehiculo_id>/', views.eliminar_auto, name='eliminar_auto'),
 ]

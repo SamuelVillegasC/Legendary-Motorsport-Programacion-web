@@ -126,7 +126,11 @@ createApp({
   },
 
   mounted() {
-    this.cars = getCars();
+    fetch('/api/vehiculos/')
+      .then(res => res.json())
+      .then(cars => {
+        this.cars = cars.map(c => ({...c, precio: Number(c.precio)}));
+      });
   },
 
   computed: {

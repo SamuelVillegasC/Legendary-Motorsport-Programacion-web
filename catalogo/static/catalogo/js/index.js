@@ -40,21 +40,24 @@ createApp({
   },
 
   mounted() {
-    const cars = getCars();
-    this.targetVehiculos = cars.length;
-    this.targetMarcas    = new Set(cars.map(c => c.marca)).size;
+    fetch('/api/vehiculos/')
+      .then(res => res.json())
+      .then(cars => {
+        this.targetVehiculos = cars.length;
+        this.targetMarcas    = new Set(cars.map(c => c.marca)).size;
 
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        this.animarContador('displayVehiculos', this.targetVehiculos, 900);
-        this.animarContador('displayMarcas',    this.targetMarcas,    900);
-        this.animarContador('displayAnios',     this.targetAnios,     1200);
-        this.animarContador('displayClientes',  this.targetClientes,  1500);
-        observer.disconnect();
-      }
-    }, { threshold: 0.4 });
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            this.animarContador('displayVehiculos', this.targetVehiculos, 900);
+            this.animarContador('displayMarcas',    this.targetMarcas,    900);
+            this.animarContador('displayAnios',     this.targetAnios,     1200);
+            this.animarContador('displayClientes',  this.targetClientes,  1500);
+            observer.disconnect();
+          }
+        }, { threshold: 0.4 });
 
-    observer.observe(this.$el);
+        observer.observe(this.$el);
+      });
   },
 
   methods: {
@@ -126,8 +129,11 @@ createApp({
   },
 
   mounted() {
-    const cars = getCars();
-    this.featuredCars = [...cars].slice(-2).reverse();
+    fetch('/api/vehiculos/')
+      .then(res => res.json())
+      .then(cars => {
+        this.featuredCars = [...cars].slice(-2).reverse();
+      });
   },
 
   methods: {

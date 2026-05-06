@@ -266,7 +266,11 @@ createApp({
   },
 
   mounted() {
-    this.cars = getCars();
+    fetch('/api/vehiculos/')
+      .then(res => res.json())
+      .then(cars => {
+        this.cars = cars.map(c => ({...c, precio: Number(c.precio)}));
+      });
   },
 
   methods: {
@@ -328,11 +332,19 @@ createApp({
     submitAlta() {
       ['nombre','marca','precio','imagen','descripcion'].forEach(f => { this.altaTouched[f] = true; });
       if (!this.validarAlta()) return;
-      this.cars.push({ id: Date.now(), ...this.alta });
-      saveCars(this.cars);
-      this.resetAlta();
-      this.altaSuccess = true;
-      setTimeout(() => { this.altaSuccess = false; }, 4000);
+      
+      fetch('/crear_auto/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.alta)
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          this.altaSuccess = true;
+          setTimeout(() => location.reload(), 1000);
+        }
+      });
     },
     resetAlta() {
       this.alta        = { nombre: '', marca: '', precio: '', imagen: '', descripcion: '', badge: '' };
@@ -346,10 +358,19 @@ createApp({
     submitEdit() {
       ['nombre','marca','precio','imagen','descripcion'].forEach(f => { this.editTouched[f] = true; });
       if (!this.validarEdit()) return;
-      const idx = this.cars.findIndex(c => c.id === this.editTarget.id);
-      if (idx !== -1) { this.cars[idx] = { ...this.editForm }; saveCars(this.cars); }
-      this.editSuccess = true;
-      setTimeout(() => { this.editSuccess = false; this.cancelEdit(); }, 2500);
+      
+      fetch('/editar_auto/' + this.editTarget.id + '/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.editForm)
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          this.editSuccess = true;
+          setTimeout(() => location.reload(), 1000);
+        }
+      });
     },
 
     /* Eliminación */
@@ -361,9 +382,16 @@ createApp({
       if (!this.deleteConfirmed) e.confirm = 'Debes confirmar la eliminación.';
       this.deleteErrors = e;
       if (Object.keys(e).length > 0) return;
-      this.cars = this.cars.filter(c => c.id !== this.deleteTarget.id);
-      saveCars(this.cars);
-      this.deleteTarget = null;
+      
+      fetch('/eliminar_auto/' + this.deleteTarget.id + '/', {
+        method: 'POST'
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          location.reload();
+        }
+      });
     }
   }
 
