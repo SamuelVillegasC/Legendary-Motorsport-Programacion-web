@@ -134,3 +134,43 @@ def check_product_name(request):
         'is_taken': Vehiculo.objects.filter(nombre__iexact=nombre).exists()
     }
     return JsonResponse(data)
+
+@staff_member_required
+def get_usuarios(request):
+    if request.method == 'GET':
+        usuarios = list(CustomUser.objects.values('id', 'username', 'first_name', 'last_name', 'email', 'direccion', 'rol'))
+        return JsonResponse(usuarios, safe=False)
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+@csrf_exempt
+@staff_member_required
+def editar_usuario(request, user_id):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        try:
+            u = CustomUser.objects.get(id=user_id)
+            u.username = data.get('username', u.username)
+            u.first_name = data.get('first_name', u.first_name)
+            u.last_name = data.get('last_name', u.last_name)
+            u.email = data.get('email', u.email)
+            u.direccion = data.get('direccion', u.direccion)
+            u.rol = data.get('rol', u.rol)
+            u.save()
+            return JsonResponse({'status': 'ok'})
+        except CustomUser.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Usuario no encontrado'}, status=404)
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+@csrf_exempt
+@staff_member_required
+def eliminar_usuario(request, user_id):
+    if request.method == 'POST':
+        try:
+            u = CustomUser.objects.get(id=user_id)
+            if request.user.id == u.id:
+                return JsonResponse({'status': 'error', 'message': 'No puedes eliminarte a ti mismo'}, status=400)
+            u.delete()
+            return JsonResponse({'status': 'ok'})
+        except CustomUser.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Usuario no encontrado'}, status=404)
+    return JsonResponse({'error': 'Método no permitido'}, status=405)

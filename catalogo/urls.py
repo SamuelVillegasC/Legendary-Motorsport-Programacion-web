@@ -18,4 +18,7 @@ urlpatterns = [
     path('crear_auto/', views.crear_auto, name='crear_auto'),
     path('editar_auto/<int:vehiculo_id>/', views.editar_auto, name='editar_auto'),
     path('eliminar_auto/<int:vehiculo_id>/', views.eliminar_auto, name='eliminar_auto'),
+    path('api/usuarios/', views.get_usuarios, name='get_usuarios'),
+    path('editar_usuario/<int:user_id>/', views.editar_usuario, name='editar_usuario'),
+    path('eliminar_usuario/<int:user_id>/', views.eliminar_usuario, name='eliminar_usuario'),
 ]

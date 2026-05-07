@@ -24,7 +24,7 @@
   <script src="{% static 'catalogo/js/contacto.js' %}"></script>
   <script src="{% static 'catalogo/js/components.js' %}"></script>
   <script>
-    renderHeader('Contacto.html');
+    renderHeader('Contacto.html', {{ request.user.is_authenticated|yesno:"true,false" }});
     renderFooter();
   </script>
 

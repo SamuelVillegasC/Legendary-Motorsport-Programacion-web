@@ -19,12 +19,21 @@ createApp({
         </div>
       </div>
       <nav>
+        <p style="color:#666; font-size:0.7rem; text-transform:uppercase; margin: 1rem 0 0.5rem 1.5rem; letter-spacing:1px;">Vehículos</p>
         <a href="#" class="nav-link" :class="{ active: panel === 'alta' }"
-           @click.prevent="setPanel('alta')">Alta</a>
+           @click.prevent="setPanel('alta')">Alta Vehículos</a>
         <a href="#" class="nav-link" :class="{ active: panel === 'modificacion' }"
-           @click.prevent="setPanel('modificacion')">Modificación</a>
+           @click.prevent="setPanel('modificacion')">Modificar Vehículos</a>
         <a href="#" class="nav-link" :class="{ active: panel === 'eliminacion' }"
-           @click.prevent="setPanel('eliminacion')">Eliminación</a>
+           @click.prevent="setPanel('eliminacion')">Eliminar Vehículos</a>
+        
+        <p style="color:#666; font-size:0.7rem; text-transform:uppercase; margin: 1.5rem 0 0.5rem 1.5rem; letter-spacing:1px;">Usuarios</p>
+        <a href="#" class="nav-link" :class="{ active: panel === 'mod_user' }"
+           @click.prevent="setPanel('mod_user')">Modificar Usuarios</a>
+        <a href="#" class="nav-link" :class="{ active: panel === 'del_user' }"
+           @click.prevent="setPanel('del_user')">Eliminar Usuarios</a>
+        
+        <p style="color:#666; font-size:0.7rem; text-transform:uppercase; margin: 1.5rem 0 0.5rem 1.5rem; letter-spacing:1px;">Navegación</p>
         <a href="/catalogo/" class="nav-link">Ver Catálogo</a>
         <a href="/"    class="nav-link">Volver al Sitio</a>
       </nav>
@@ -32,11 +41,11 @@ createApp({
 
     <main>
       <header class="topbar">
-        <span>Gestión de Vehículos &nbsp;/&nbsp; <b>{{ panelTitle }}</b></span>
+        <span>Gestión Principal &nbsp;/&nbsp; <b>{{ panelTitle }}</b></span>
         <span class="dot"></span>
       </header>
 
-      <!-- PANEL 01: ALTA -->
+      <!-- PANEL 01: ALTA VEHÍCULOS -->
       <section class="panel" v-show="panel === 'alta'">
         <div class="panel-head">
           <span class="num">01</span>
@@ -101,7 +110,7 @@ createApp({
         </form>
       </section>
 
-      <!-- PANEL 02: MODIFICACIÓN -->
+      <!-- PANEL 02: MODIFICACIÓN VEHÍCULOS -->
       <section class="panel" v-show="panel === 'modificacion'">
         <div class="panel-head">
           <span class="num">02</span>
@@ -178,7 +187,7 @@ createApp({
         </div>
       </section>
 
-      <!-- PANEL 03: ELIMINACIÓN -->
+      <!-- PANEL 03: ELIMINACIÓN VEHÍCULOS -->
       <section class="panel" v-show="panel === 'eliminacion'">
         <div class="panel-head">
           <span class="num">03</span>
@@ -233,6 +242,104 @@ createApp({
         </div>
       </section>
 
+      <!-- PANEL 04: MODIFICACIÓN USUARIOS -->
+      <section class="panel" v-show="panel === 'mod_user'">
+        <div class="panel-head">
+          <span class="num">04</span>
+          <div><h1>Modificación de Usuarios</h1><p>Edita los datos y roles de los usuarios del sistema.</p></div>
+        </div>
+        <div class="car-list" v-if="!editUserTarget">
+          <p v-if="users.length === 0">No hay usuarios registrados.</p>
+          <div class="car-list-item" v-for="u in users" :key="u.id" @click="selectEditUser(u)">
+            <span class="cli-nombre">{{ u.username }}</span>
+            <span class="cli-marca" style="color: #888;">{{ u.first_name }} {{ u.last_name }}</span>
+            <span class="cli-precio" style="color: #d4af37;">{{ u.rol === 'admin' ? 'Administrador' : 'Usuario' }}</span>
+            <span class="cli-arrow">→</span>
+          </div>
+        </div>
+        <div v-if="editUserTarget">
+          <button type="button" class="btn ghost" @click="cancelEditUser">← Volver a la lista</button>
+          <div class="msg-success" v-if="editUserSuccess">✓ Usuario actualizado correctamente.</div>
+          <form @submit.prevent="submitEditUser">
+            <div class="field">
+              <label>Username (Solo lectura)</label>
+              <input type="text" v-model="editUserForm.username" disabled style="opacity: 0.5;" />
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="eu-nombre">Nombre</label>
+                <input type="text" id="eu-nombre" v-model.trim="editUserForm.first_name" />
+              </div>
+              <div class="field">
+                <label for="eu-apellido">Apellido</label>
+                <input type="text" id="eu-apellido" v-model.trim="editUserForm.last_name" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="eu-email">Email</label>
+              <input type="email" id="eu-email" v-model.trim="editUserForm.email" />
+            </div>
+            <div class="field">
+              <label for="eu-dir">Dirección</label>
+              <input type="text" id="eu-dir" v-model.trim="editUserForm.direccion" />
+            </div>
+            <div class="field">
+              <label for="eu-rol">Rol en el Sistema <span>*</span></label>
+              <select id="eu-rol" v-model="editUserForm.rol">
+                <option value="user">Usuario (Cliente Normal)</option>
+                <option value="admin">Administrador (Acceso Total)</option>
+              </select>
+            </div>
+            <div class="actions">
+              <button type="button" class="btn ghost" @click="cancelEditUser">Cancelar</button>
+              <button type="submit" class="btn warning">Guardar Usuario →</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- PANEL 05: ELIMINACIÓN USUARIOS -->
+      <section class="panel" v-show="panel === 'del_user'">
+        <div class="panel-head">
+          <span class="num">05</span>
+          <div><h1>Eliminación de Usuarios</h1><p>Selecciona el usuario a revocar.</p></div>
+        </div>
+        <div class="alert">
+          <span>⚠</span>
+          <p>Esta acción es <strong>irreversible</strong> y borrará todo rastro del usuario.</p>
+        </div>
+        <p v-if="users.length === 0">No hay usuarios registrados.</p>
+        <div class="car-list" v-if="!deleteUserTarget">
+          <div class="car-list-item" v-for="u in users" :key="u.id" @click="selectDeleteUser(u)">
+            <span class="cli-nombre">{{ u.username }}</span>
+            <span class="cli-marca" style="color: #888;">{{ u.first_name }} {{ u.last_name }}</span>
+            <span class="cli-precio" style="color: #d4af37;">{{ u.rol === 'admin' ? 'Administrador' : 'Usuario' }}</span>
+            <span class="cli-delete">✕</span>
+          </div>
+        </div>
+        <div v-if="deleteUserTarget">
+          <div class="delete-preview">
+            <p>Vas a eliminar al usuario:</p>
+            <strong>@{{ deleteUserTarget.username }}</strong>
+            <span>{{ deleteUserTarget.first_name }} {{ deleteUserTarget.last_name }}</span>
+          </div>
+          <div class="ferr" v-if="deleteUserError" style="margin-bottom: 1rem; text-align: center; font-size: 1rem;">{{ deleteUserError }}</div>
+          <form @submit.prevent="confirmDeleteUser">
+            <div class="confirm-box">
+              <label class="check-label">
+                <input type="checkbox" v-model="deleteUserConfirmed" />
+                <span class="check"></span>
+                Confirmo que deseo eliminar a este usuario de forma permanente
+              </label>
+            </div>
+            <div class="actions">
+              <button type="button" class="btn ghost" @click="cancelDeleteUser">Cancelar</button>
+              <button type="submit" class="btn danger" :disabled="!deleteUserConfirmed">Eliminar Usuario ✕</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
     </main>
   `,
 
@@ -240,6 +347,7 @@ createApp({
     return {
       panel: 'alta',
       cars:  [],
+      users: [],
       
       alta:         { nombre: '', marca: '', precio: '', imagen: '', descripcion: '', badge: '' },
       altaErrors:   {},
@@ -255,33 +363,60 @@ createApp({
       deleteTarget:    null,
       deleteMotivo:    '',
       deleteConfirmed: false,
-      deleteErrors:    {}
+      deleteErrors:    {},
+
+      editUserTarget:  null,
+      editUserForm:    {},
+      editUserSuccess: false,
+
+      deleteUserTarget: null,
+      deleteUserConfirmed: false,
+      deleteUserError: ''
     };
   },
 
   computed: {
     panelTitle() {
-      return { alta: 'Alta', modificacion: 'Modificación', eliminacion: 'Eliminación' }[this.panel] || '';
+      return { 
+        alta: 'Alta de Vehículos', 
+        modificacion: 'Modificación de Vehículos', 
+        eliminacion: 'Eliminación de Vehículos',
+        mod_user: 'Modificación de Usuarios',
+        del_user: 'Eliminación de Usuarios'
+      }[this.panel] || '';
     }
   },
 
   mounted() {
-    fetch('/api/vehiculos/')
-      .then(res => res.json())
-      .then(cars => {
-        this.cars = cars.map(c => ({...c, precio: Number(c.precio)}));
-      });
+    this.fetchData();
   },
 
   methods: {
+    fetchData() {
+      fetch('/api/vehiculos/')
+        .then(res => res.json())
+        .then(cars => {
+          this.cars = cars.map(c => ({...c, precio: Number(c.precio)}));
+        });
+      
+      fetch('/api/usuarios/')
+        .then(res => res.json())
+        .then(users => {
+          this.users = users;
+        });
+    },
 
     /* Navegación */
     setPanel(p) {
-      this.panel       = p;
-      this.altaSuccess  = false;
-      this.editSuccess  = false;
-      this.editTarget   = null;
-      this.deleteTarget = null;
+      this.panel            = p;
+      this.altaSuccess      = false;
+      this.editSuccess      = false;
+      this.editTarget       = null;
+      this.deleteTarget     = null;
+      this.editUserTarget   = null;
+      this.editUserSuccess  = false;
+      this.deleteUserTarget = null;
+      this.deleteUserError  = '';
     },
 
     fmtP(precio) { return formatPrice(precio); },
@@ -328,7 +463,7 @@ createApp({
       this.editErrors = e;
     },
 
-    /* Alta */
+    /* Alta Vehículos */
     submitAlta() {
       ['nombre','marca','precio','imagen','descripcion'].forEach(f => { this.altaTouched[f] = true; });
       if (!this.validarAlta()) return;
@@ -352,7 +487,7 @@ createApp({
       this.altaTouched = {};
     },
 
-    /* Modificación */
+    /* Modificación Vehículos */
     selectEdit(car)  { this.editTarget = car; this.editForm = { ...car }; this.editErrors = {}; this.editTouched = {}; this.editSuccess = false; },
     cancelEdit()     { this.editTarget = null; this.editSuccess = false; },
     submitEdit() {
@@ -373,7 +508,7 @@ createApp({
       });
     },
 
-    /* Eliminación */
+    /* Eliminación Vehículos */
     selectDelete(car) { this.deleteTarget = car; this.deleteMotivo = ''; this.deleteConfirmed = false; this.deleteErrors = {}; },
     cancelDelete()    { this.deleteTarget = null; },
     confirmDelete() {
@@ -392,7 +527,50 @@ createApp({
           location.reload();
         }
       });
+    },
+
+    /* Modificación Usuarios */
+    selectEditUser(user) { this.editUserTarget = user; this.editUserForm = { ...user }; this.editUserSuccess = false; },
+    cancelEditUser() { this.editUserTarget = null; this.editUserSuccess = false; },
+    submitEditUser() {
+      fetch('/editar_usuario/' + this.editUserTarget.id + '/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.editUserForm)
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          this.editUserSuccess = true;
+          setTimeout(() => location.reload(), 1000);
+        }
+      });
+    },
+
+    /* Eliminación Usuarios */
+    selectDeleteUser(user) { this.deleteUserTarget = user; this.deleteUserConfirmed = false; this.deleteUserError = ''; },
+    cancelDeleteUser() { this.deleteUserTarget = null; },
+    confirmDeleteUser() {
+      fetch('/eliminar_usuario/' + this.deleteUserTarget.id + '/', {
+        method: 'POST'
+      })
+      .then(r => {
+        if (!r.ok) {
+          return r.json().then(e => Promise.reject(e));
+        }
+        return r.json();
+      })
+      .then(data => {
+        if (data.status === 'ok') {
+          location.reload();
+        }
+      })
+      .catch(err => {
+        this.deleteUserError = err.message || 'Error al eliminar usuario';
+        this.deleteUserConfirmed = false;
+      });
     }
+
   }
 
 }).mount('#app-admin');

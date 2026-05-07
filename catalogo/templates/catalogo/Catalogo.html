@@ -23,8 +23,9 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script>
     const IS_ADMIN = {{ request.user.is_staff|yesno:"true,false" }};
+    const IS_AUTH  = {{ request.user.is_authenticated|yesno:"true,false" }};
   </script>
-  <script src="{% static 'catalogo/js/catalogo.js' %}?v=4"></script>
+  <script src="{% static 'catalogo/js/catalogo.js' %}?v=5"></script>
   <script src="{% static 'catalogo/js/components.js' %}?v=6"></script>
   <script>
     renderHeader('Catalogo.html', {{ request.user.is_authenticated|yesno:"true,false" }});

@@ -161,6 +161,12 @@ createApp({
   methods: {
     formatPrice(precio) { return formatPrice(precio); },
     contactar(nombre) {
+      const isAuth = typeof IS_AUTH !== 'undefined' ? IS_AUTH : false;
+      if (!isAuth) {
+        alert('Debes iniciar sesión para adquirir este vehículo.');
+        window.location.href = '/login/';
+        return;
+      }
       alert('Preparando todo para su compra, toda la informacion se le hara llegar a su correo. Gracias por escoger a Legendary Motorsport');
     }
   }

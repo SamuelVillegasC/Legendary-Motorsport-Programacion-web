@@ -39,7 +39,7 @@
 
   <script src="{% static 'catalogo/js/components.js' %}"></script>
   <script>
-    renderHeader('Vision.html');
+    renderHeader('Vision.html', {{ request.user.is_authenticated|yesno:"true,false" }});
     renderFooter();
   </script>
 
