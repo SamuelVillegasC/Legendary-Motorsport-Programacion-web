@@ -109,7 +109,7 @@ createApp({
         </div>
       </div>
 
-      <div class="catalogo-cta">
+      <div class="catalogo-cta" v-if="isAdmin">
         <a href="/CRUD/" class="btn-primary">Administrar catálogo →</a>
       </div>
 
@@ -121,7 +121,8 @@ createApp({
       cars: [],
       searchQuery: '',
       selectedBrand: '',
-      selectedPrice: ''
+      selectedPrice: '',
+      isAdmin: typeof IS_ADMIN !== 'undefined' ? IS_ADMIN : false
     };
   },
 
@@ -129,7 +130,7 @@ createApp({
     fetch('/api/vehiculos/')
       .then(res => res.json())
       .then(cars => {
-        this.cars = cars.map(c => ({...c, precio: Number(c.precio)}));
+        this.cars = cars.map(c => ({ ...c, precio: Number(c.precio) }));
       });
   },
 
@@ -160,7 +161,7 @@ createApp({
   methods: {
     formatPrice(precio) { return formatPrice(precio); },
     contactar(nombre) {
-      alert('Gracias por su interés en el ' + nombre + '.\nContáctenos en la sección Contacto para más información.');
+      alert('Preparando todo para su compra, toda la informacion se le hara llegar a su correo. Gracias por escoger a Legendary Motorsport');
     }
   }
 

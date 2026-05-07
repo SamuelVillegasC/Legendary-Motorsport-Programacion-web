@@ -72,6 +72,55 @@ def eliminar_auto(request, vehiculo_id):
         return JsonResponse({'status': 'ok'})
     return JsonResponse({'status': 'error'}, status=400)
 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password
+
+def login_page(request):
+    return render(request, 'catalogo/Login.html')
+
+@csrf_exempt
+def api_login(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'status': 'ok', 'rol': user.rol})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Credenciales inválidas'}, status=401)
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+@csrf_exempt
+def api_register(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        
+        if CustomUser.objects.filter(username__iexact=username).exists():
+            return JsonResponse({'status': 'error', 'message': 'El nombre de usuario ya está en uso'}, status=400)
+            
+        user = CustomUser.objects.create(
+            username=username,
+            password=make_password(data.get('password')),
+            email=data.get('email', ''),
+            first_name=data.get('first_name', ''),
+            last_name=data.get('last_name', ''),
+            direccion=data.get('direccion', ''),
+            rol='user'
+        )
+        login(request, user)
+        return JsonResponse({'status': 'ok', 'rol': user.rol})
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+@csrf_exempt
+def api_logout(request):
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'status': 'ok'})
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
+
 def check_username(request):
     username = request.GET.get('username', None)
     data = {

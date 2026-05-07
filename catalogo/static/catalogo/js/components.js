@@ -1,6 +1,6 @@
 // components.js
 
-function renderHeader(paginaActiva) {
+function renderHeader(paginaActiva, isAuth = false) {
   const links = [
     { href: '/', label: 'Inicio' },
     { href: '/catalogo/', label: 'Catálogo' },
@@ -9,10 +9,16 @@ function renderHeader(paginaActiva) {
     { href: '/contacto/', label: 'Contacto' }
   ];
 
-  const navLinks = links.map(link => {
+  let navLinks = links.map(link => {
     const activo = link.href === paginaActiva ? 'active-link' : '';
     return `<a href="${link.href}" class="nav-link ${activo}">${link.label}</a>`;
   }).join('');
+
+  if (isAuth) {
+    navLinks += `<a href="#" onclick="logoutUser(event)" class="nav-link" style="color:#d4af37;">Cerrar Sesión</a>`;
+  } else {
+    navLinks += `<a href="/login/" class="nav-link" style="color:#d4af37;">Iniciar Sesión</a>`;
+  }
 
   document.getElementById('header').innerHTML = `
     <div class="header-inner">
@@ -20,6 +26,12 @@ function renderHeader(paginaActiva) {
       <nav id="nav-bar">${navLinks}</nav>
     </div>
   `;
+}
+
+function logoutUser(e) {
+  e.preventDefault();
+  fetch('/api/logout/', { method: 'POST' })
+    .then(() => window.location.href = '/');
 }
 
 function renderFooter() {
