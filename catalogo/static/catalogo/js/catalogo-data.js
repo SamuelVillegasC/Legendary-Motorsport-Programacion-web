@@ -4,7 +4,6 @@ const INITIAL_CARS = [
 ];
 */
 
-// Funciones deprecadas tras la migración a la API REST de Django
 function getCars() {
   console.warn("getCars() ya no se usa. Usa fetch('/api/vehiculos/')");
   return [];

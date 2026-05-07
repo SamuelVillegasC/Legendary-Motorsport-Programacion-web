@@ -44,7 +44,7 @@
   <script src="{% static 'catalogo/js/index.js' %}?v=2"></script>
   <script src="{% static 'catalogo/js/components.js' %}"></script>
   <script>
-    renderHeader('index.html');
+    renderHeader('index.html', {{ request.user.is_authenticated|yesno:"true,false" }});
     renderFooter();
   </script>
 

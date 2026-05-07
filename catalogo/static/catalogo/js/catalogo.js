@@ -109,7 +109,7 @@ createApp({
         </div>
       </div>
 
-      <div class="catalogo-cta">
+      <div class="catalogo-cta" v-if="isAdmin">
         <a href="/CRUD/" class="btn-primary">Administrar catálogo →</a>
       </div>
 
@@ -121,7 +121,8 @@ createApp({
       cars: [],
       searchQuery: '',
       selectedBrand: '',
-      selectedPrice: ''
+      selectedPrice: '',
+      isAdmin: typeof IS_ADMIN !== 'undefined' ? IS_ADMIN : false
     };
   },
 

@@ -5,8 +5,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Legendary Motorsport &mdash; Cat&aacute;logo</title>
+  <title>Legendary Motorsport &mdash; Autenticación</title>
   <link rel="stylesheet" href="{% static 'catalogo/css/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'catalogo/css/login.css' %}" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" />
 </head>
@@ -15,19 +16,15 @@
 
   <header id="header"></header>
 
-  <!-- App catálogo: lógica, filtros y template en catalogo.js -->
-  <div id="app-catalogo"></div>
+  <div id="app-login"></div>
 
   <footer class="footer" id="footer"></footer>
-  <script src="{% static 'catalogo/js/catalogo-data.js' %}?v=4"></script>
+
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="{% static 'catalogo/js/components.js' %}?v=5"></script>
+  <script src="{% static 'catalogo/js/login.js' %}?v=2"></script>
   <script>
-    const IS_ADMIN = {{ request.user.is_staff|yesno:"true,false" }};
-  </script>
-  <script src="{% static 'catalogo/js/catalogo.js' %}?v=4"></script>
-  <script src="{% static 'catalogo/js/components.js' %}?v=6"></script>
-  <script>
-    renderHeader('Catalogo.html', {{ request.user.is_authenticated|yesno:"true,false" }});
+    renderHeader('Login.html');
     renderFooter();
   </script>
 
