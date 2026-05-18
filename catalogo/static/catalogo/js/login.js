@@ -130,7 +130,7 @@ createApp({
               this.usernameOk = true;
             }
           });
-      }, 500); // 500ms debounce
+      }, 500);
     },
 
     submitLogin() {
