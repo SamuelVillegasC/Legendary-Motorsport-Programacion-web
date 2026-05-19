@@ -12,6 +12,10 @@ class CustomUser(AbstractUser):
     rol = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
 
     def save(self, *args, **kwargs):
+        # Sincronizar createsuperuser de consola con el rol interno
+        if self.is_superuser:
+            self.rol = 'admin'
+            
         if self.rol == 'admin':
             self.is_staff = True
             self.is_superuser = True
